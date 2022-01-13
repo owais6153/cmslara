@@ -11323,3 +11323,18 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/*Custom*/
+ul.nav.nav-tabs.flex-column * {
+  border-radius: 0px;
+  border: none;
+}
+
+ul.nav.nav-tabs.flex-column {
+  border: none;
+}
+
+ul.nav.nav-tabs.flex-column li a.active {
+  background: #4e73df;
+  color: #fff;
+}

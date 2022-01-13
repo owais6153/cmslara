@@ -8,77 +8,55 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ (isset($title)) ? $title : config('app.name', 'Laravel') }}</title>
+    <title>@isset($title)
+            {{$title}}
+           @else
+             {{ ($globalsettings->getValue('general', 'site_title')) ? $globalsettings->getValue('general', 'site_title') : config('app.name', 'Laravel') }}            
+           @endif
+
+    </title>
 
 
-
+    <script src="https://kit.fontawesome.com/7ada220a14.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
 
 
 </head>
 <body class="{{ (isset($body_class)) ? $body_class : '' }}">
-    <div id="app">
-        @if(isset($dashboard_nav) && $dashboard_nav)
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <div id="wrapper">
+        @if(!isset($sidebar) || $sidebar)
+            @include('layouts.admin.sidebar')
         @endif
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">                    
+                    @if(!isset($topbar) || $topbar)
+                        @include('layouts.admin.topbar')
+                    @endif
+                    <div class="container-fluid">
+
+                        @yield('content')
+
+                    </div>
+                </div>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+            </div>
     </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
     <!-- Scripts -->
         <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('js/admin/jquery/jquery.min.js') }}"></script>
