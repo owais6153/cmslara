@@ -16,6 +16,9 @@ class SettingsRequest extends FormRequest
         'general' => [
             'value.site_name' => 'required',
             'value.site_title' => 'required',
+         ],
+         'registration' => [
+            'value.default_role'=> 'required',
          ]
     );
     public $selectedFieldsForValidation = array();

@@ -9,26 +9,18 @@ class GlobalSettings extends Model
 {
 
     protected $settings;
-    protected $keyValuePair;
 
     public function __construct( $settings)
     {
-        $this->settings = $settings;
-        foreach ($settings as $setting){
-            $this->keyValuePair[$setting->name] = unserialize($setting->value);
-        }
+        $this->settings = (isset($settings->value)) ?  unserialize($settings->value) : array();
     }
 
-
-    public function get(string $type){
-        if (isset($this->keyValuePair[$type])) {
-            return $this->keyValuePair[$type];
-        }
-        return false;
+    public function getAll(){
+        return $settings;
     }
-    public function getValue(string $type, $key){
-        if (isset($this->keyValuePair[$type])) {
-            return $this->keyValuePair[$type][$key];
+    public function getValue(string  $key){
+        if (isset($this->settings[$key])) {
+            return $this->settings[$key];
         }
         return false;
     }

@@ -12,5 +12,10 @@ class Settings extends Model
     protected $table='settings';
     protected $softDelete = true;
 
-
+    public function get($name)
+    {
+        $data  = Settings::where('name', '=', $name)->first();
+        $settings = (isset($data->value) && $data->value != null) ? unserialize($data->value) : array();
+        return $settings;
+    }
 }

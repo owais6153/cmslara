@@ -63,14 +63,14 @@
                                     <hr>
 
                                     <div class="text-center">
-                                        @if (Route::has('password.request'))
+                                        @if (isset($Settings['allow_forget_password']) && $Settings['allow_forget_password'] == 1)
                                             <a class="small" href="{{ route('password.request') }}">
                                                 {{ __('Forgot Your Password?') }}
                                             </a>
                                         @endif
                                     </div>
                                     <div class="text-center">
-                                      @if (Route::has('register'))
+                                      @if (isset($Settings['allow_registrstion']) && $Settings['allow_registrstion'] == 1)
                                             <a class="small" href="{{ route('register') }}">{{ __('Register') }}</a>
                                       @endif
                                     </div>

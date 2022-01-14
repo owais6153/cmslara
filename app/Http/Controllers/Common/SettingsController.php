@@ -5,11 +5,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\SettingsRequest;
 use App\Models\Settings;
+use Bouncer;
 class SettingsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {    
-        return view('admin.settings');
+        $type = $request->type;
+        $Settings = Settings::get($request->type);            
+        $roles = Bouncer::role()->all()->pluck('name');
+        if (view()->exists('admin.settings.' . $request->type)) {
+        return view('admin.settings', compact('type', 'Settings', 'roles'));            
+        }
+        else{
+            abort(404);
+        }
     }
     public function save(SettingsRequest $request)
     {

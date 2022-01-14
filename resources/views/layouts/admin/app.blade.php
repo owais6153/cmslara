@@ -11,7 +11,7 @@
     <title>@isset($title)
             {{$title}}
            @else
-             {{ ($globalsettings->getValue('general', 'site_title')) ? $globalsettings->getValue('general', 'site_title') : config('app.name', 'Laravel') }}            
+             {{ ($globalsettings->getValue('site_title')) ? $globalsettings->getValue('site_title') : config('app.name', 'Laravel') }}            
            @endif
 
     </title>
@@ -26,6 +26,8 @@
 
 </head>
 <body class="{{ (isset($body_class)) ? $body_class : '' }}">
+
+
     <div id="wrapper">
         @if(!isset($sidebar) || $sidebar)
             @include('layouts.admin.sidebar')
@@ -47,7 +49,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
+                            <span>Copyright &copy; {{ ($globalsettings->getValue( 'site_name')) ? $globalsettings->getValue( 'site_name') : config('app.name', 'Laravel') }} 2020</span>
                         </div>
                     </div>
                 </footer>
@@ -66,5 +68,10 @@
     <script src="{{ asset('js/admin/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom Js -->
     <script src="{{ asset('js/admin/sb-admin-2.js') }}" defer></script>
+
+    <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    @yield('scripts')
 </body>
 </html>
