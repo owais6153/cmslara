@@ -20,7 +20,7 @@
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                            <div class="form-group w-100 mb-0">
                             
-                            <input type="text"  id="username" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Enter Full Name" value="{{old('name')}}">        
+                            <input type="text"  id="username" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Enter Full Name*" required="" value="{{old('name')}}">        
                                 @error('name')
                                     <div class="text-danger">
                                         {{$message}}                                            
@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <div class="form-group">
                             <label for="email">Email address*</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter Email" name="email" value="{{old('email')}}">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" required="" placeholder="Enter Email" name="email" value="{{old('email')}}">
                             @error('email')
                                 <div class="text-danger">
                                     {{$message}}                                            
@@ -42,7 +42,7 @@
 
                             <div class="form-group">
                             <label for="exampleInputPassword1">Password*</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Password" name="password" value="">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" required="" placeholder="Password" name="password" value="">
                             @error('password')
                                 <div class="text-danger">
                                     {{$message}}                                            
@@ -56,6 +56,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             @if(Bouncer::can('addRoles') || Bouncer::can('viewRoles'))
+                            <label for="role">Select Role*</label>
                             <div class="form-group">
                                 <select name="role" id="role" required="" class="form-control">
                                     <option value="">Select Role</option>
@@ -70,7 +71,8 @@
                             <input type="hidden" name="role" value="{{$Settings['default_role']}}">
                             @endif
                             <div class="form-group">
-                                <select class="form-control  @error('email_verified_at') is-invalid @enderror" name="email_verified_at">
+                                <label for="role">Select Verfication Options*</label>
+                                <select class="form-control  @error('email_verified_at') is-invalid @enderror" name="email_verified_at" required="">
                                     <option value="">Verfication Options</option>
                                     <option value="send">Send Verification Email</option>
                                     <option value="verified">Email Aleady Verified</option>

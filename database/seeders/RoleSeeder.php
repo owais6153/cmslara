@@ -14,6 +14,10 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $permissions =[
+            'viewPages',
+            'addPages',
+            'updatePages',
+            'deletePages',
             'viewUsers',
             'addUsers',
             'updateUsers',

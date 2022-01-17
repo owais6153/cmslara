@@ -54,6 +54,7 @@ class RoleController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:roles|max:255',
+            'value' => 'required',
         ]);
 
         if ($request->has('permission') ) {  
@@ -81,6 +82,7 @@ class RoleController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
+            'value' => 'required',
         ]);      
         $role =Bouncer::role()->find($id);
         $role->name = $request->name;

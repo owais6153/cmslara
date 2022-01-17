@@ -16,4 +16,4 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.sass('resources/admin/scss/app.scss', 'public/css/admin/app.css');
+mix.sass('resources/scss/admin/app.scss', 'public/css/admin/app.css');

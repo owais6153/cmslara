@@ -1,4 +1,4 @@
-@extends('layouts.admin.app', ['title' => 'General Settings'])
+@extends('layouts.admin.app', ['title' => 'All Roles'])
 
 
 

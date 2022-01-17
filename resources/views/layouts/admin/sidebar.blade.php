@@ -19,7 +19,30 @@
             </li>
             <hr class="sidebar-divider">
 
-
+            @if ( Bouncer::can('viewPages') || Bouncer::can('addPages') )
+            <div class="sidebar-heading">
+                Pages
+            </div>
+            <li class="nav-item {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'active' : ''}}">
+                <a class="nav-link {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? '' : 'collapsed'}} " href="#" data-toggle="collapse" data-target="#pages"
+                    aria-expanded="true" aria-controls="pages">
+                    <i class="fas fa-file"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="pages" class="collapse {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'show' : ''}}" aria-labelledby="All Pages" data-parent="#accordionSidebar">
+                    <div class="bg-primary py-2 collapse-inner rounded">
+                        @can('viewPages')
+                        <a class="collapse-item text-light" href="{{route('pages')}}">All Pages</a>
+                        @endcan
+                        @can('addPages')
+                        <a class="collapse-item text-light" href="{{route('pages.add')}}">Add Pages</a>
+                        @endcan
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            @endif
 
 
              @if (Bouncer::can('viewUsers') || Bouncer::can('addUsers') || Bouncer::can('viewRoles') || Bouncer::can('addRoles') )
@@ -54,7 +77,7 @@
                     <i class="fas fa-users"></i>
                     <span>Roles</span>
                 </a>
-                <div id="roles" class="collapse {{(request()->is('admin/roles/*') || request()->is('admin/roles') ) ? 'show' : ''}}" aria-labelledby="All Users" data-parent="#accordionSidebar">
+                <div id="roles" class="collapse {{(request()->is('admin/roles/*') || request()->is('admin/roles') ) ? 'show' : ''}}" aria-labelledby="All Roles" data-parent="#accordionSidebar">
                     <div class="bg-primary py-2 collapse-inner rounded">
                         @can('viewRoles')
                         <a class="collapse-item text-light" href="{{route('roles')}}">All Roles</a>

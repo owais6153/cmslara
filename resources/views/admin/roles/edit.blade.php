@@ -20,7 +20,7 @@
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                            <div class="form-group w-100 mb-0">
                             
-                            <input type="text"  id="username" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Role Name" value="{!! $role->name !!}">        
+                            <input type="text"  id="username" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Role Name*" required="" value="{!! $role->name !!}">        
                                 @error('name')
                                     <div class="text-danger">
                                         {{$message}}                                            
@@ -30,16 +30,43 @@
                            
                         </div>
                         <div class="card-body px-5">
-                            <h3 class="h4 mb-4">Permisions</h3>
-                            <h4 class="h5">Dashboard</h4>
+                            <h3 class="h3 mb-4">Permisions</h3>
+                            <h4 class="h5 mt-4">Dashboard & Settings</h4>
                             <div class="form-group mb-4 d-flex">
 
                                 <div class="custom-control custom-checkbox mr-3 small">
                                     <input id="accessDashboard" type="checkbox" {!! in_array('accessDashboard',$abilitiesarray) == true ?"checked":"" !!}  class=" custom-control-input " name="permission[accessDashboard]" value="1" >
                                     <label for="accessDashboard" class="custom-control-label">Access Dashboard</label>
+                                </div>                                
+                                <div class="custom-control custom-checkbox mr-3 small">
+                                    <input id="accessSettings" type="checkbox" {!! in_array('accessSettings',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[accessSettings]" value="1" >
+                                    <label for="accessSettings" class="custom-control-label">Access Settings</label>
                                 </div>
                             </div>
-                            <h4 class="h5">Users</h4>
+                            <hr class="sidebar-divider">
+                            <h4 class="h5 mt-4">Pages</h4>
+                            <div class="form-group mb-4 d-flex">
+
+                                <div class="custom-control custom-checkbox mr-3 small">
+                                    <input id="viewPages" type="checkbox" {!! in_array('viewPages',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[viewPages]" value="1" >
+                                    <label for="viewPages" class="custom-control-label">View Pages</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mr-3 small">
+                                    <input id="addPages" type="checkbox" {!! in_array('addPages',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[addPages]" value="1" >
+                                    <label for="addPages" class="custom-control-label">Add Pages</label>
+                                </div>
+                                <div class="custom-control custom-checkbox mr-3 small">
+                                    <input id="updatePages" type="checkbox" {!! in_array('updatePages',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[updatePages]" value="1" >
+                                    <label for="updatePages" class="custom-control-label">Update Pages</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mr-3 small">
+                                    <input id="deletePages" type="checkbox" {!! in_array('deletePages',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[deletePages]" value="1" >
+                                    <label for="deletePages" class="custom-control-label">Delete Pages</label>
+                                </div>
+                            </div>
+                            <hr class="sidebar-divider">
+                            <h4 class="h5 mt-4">Users</h4>
                             <div class="form-group mb-4 d-flex">
 
                                 <div class="custom-control custom-checkbox mr-3 small">
@@ -61,7 +88,8 @@
                                     <label for="deleteUsers" class="custom-control-label">Delete Users</label>
                                 </div>
                             </div>
-                            <h4 class="h5">Roles</h4>
+                            <hr class="sidebar-divider">
+                            <h4 class="h5 mt-4">Roles</h4>
                             <div class="form-group mb-4 d-flex">
 
                                 <div class="custom-control custom-checkbox mr-3 small">
@@ -83,17 +111,9 @@
                                     <label for="deleteRoles" class="custom-control-label">Delete Roles</label>
                                 </div>
                             </div>
-                            <h4 class="h5">Settings</h4>
-                            <div class="form-group mb-4 d-flex">
-                                <div class="custom-control custom-checkbox mr-3 small">
-                                    <input id="accessSettings" type="checkbox" {!! in_array('accessSettings',$abilitiesarray) == true ?"checked":"" !!} class=" custom-control-input " name="permission[accessSettings]" value="1" >
-                                    <label for="accessSettings" class="custom-control-label">Access Settings</label>
-                                </div>
-
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-primary btn-block px-5">
-                                    {{ __('Add') }}
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                         </div>

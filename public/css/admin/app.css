@@ -11366,3 +11366,13 @@ div#dataTable_filter input {
 div#dataTable_wrapper {
   padding: 0 15px;
 }
+
+.card-header input {
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+}
+
+select#template {
+  text-transform: capitalize;
+}

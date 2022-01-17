@@ -27,7 +27,7 @@ class UserController extends Controller
                 
                 $actionBtn= '';
                 if(Bouncer::can('updateUsers')){
-                $actionBtn .='<a href="'.route('users.edit', ['id' => $row->id]).'" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
+                $actionBtn .='<a href="'.route('users.edit', ['user' => $row->id]).'" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
                 }
                 if (Bouncer::can('updateRoles') && $row->id != 1 && $user_id != $row->id) {
                     $actionBtn .= '<a class="btn-circle btn btn-sm btn-danger" href="'.route('users.delete', ['id' => $row->id]).'"><i class="fas fa-trash-alt"></i></a>';
@@ -62,14 +62,11 @@ class UserController extends Controller
         $user->assign($request->role);
         return Redirect::route('users')->with(['msg' => 'User added', 'msg_type' => 'success']);
     }
-    public function editUsers(Request $request)
+    public function editUsers(User $user)
     {
         $roles = Bouncer::role()->all()->pluck('name');
-        $user = User::where('id', '=', $request->id)->first();
         $Settings = Settings::get('registration');
-        if (empty($user)) {
-            abort(404);
-        }
+
         return view('admin.users.edit', compact('user', 'roles', 'Settings'));
     }
     public function updateUsers(UserUpdateRequest $request)
