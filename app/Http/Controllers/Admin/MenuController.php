@@ -35,6 +35,11 @@ class MenuController extends Controller
                 if (isset($value['id'])) {
                     if (isset($value['delete']) && $value['delete']) {
                          Menu::where('id', $value['id'])->delete();
+                         if (array_key_exists('children', $value)) {
+                             foreach($value['children'] as $childkey => $child){
+                                $value['children'][$childkey]['delete'] = true;
+                             }
+                         }
                     }
                     else{
                         $updateMenu = Menu::where('id', $value['id'])->update([

@@ -11391,7 +11391,7 @@ ol ol {
   line-height: 32px;
   border: 1px solid #ccc;
   background: #fafafa;
-  border-radius: 0;
+  border-radius: 4px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
@@ -11428,7 +11428,9 @@ ol ol {
   background-color: #4e73df;
   background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
   background-size: cover;
-  border-radius: 0;
+  border-radius: 0px;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
 }
 
 .dd3-handle:before {
