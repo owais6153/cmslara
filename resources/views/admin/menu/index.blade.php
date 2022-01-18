@@ -33,7 +33,7 @@
                                 <div class="alert alert-warning">No Links Found</div>
                             @endif
                             <div class="dd" id="nestable">
-                                <ol class="dd_list">                                
+                                <ol class="dd-list">                                
                                     @foreach($menus as $menuIndex => $menu) 
                                         <li data-id="{{$menu->id}}" data-label="{{$menu->title}}" class="dd-item dd3-item" data-url="{{$menu->link}}" data-attr_class="{{$menu->attr_class}}" data-attr_id="{{$menu->attr_id}}">
 

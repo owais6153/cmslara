@@ -50,7 +50,7 @@
             '</div>' +
             '</li>';
  
-        $("#nestable > .dd_list").append(item);
+        $("#nestable > .dd-list").append(item);
         $("#nestable").find('.dd-empty').remove();
         updateOutput();
     };
