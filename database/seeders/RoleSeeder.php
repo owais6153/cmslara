@@ -13,25 +13,12 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $permissions =[
-            'viewPages',
-            'addPages',
-            'updatePages',
-            'deletePages',
-            'viewUsers',
-            'addUsers',
-            'updateUsers',
-            'deleteUsers',
-            'viewRoles',
-            'addRoles',
-            'updateRoles',
-            'deleteRoles',
-            'accessSettings',
-            'accessDashboard',
-        ];
+        $permissions = config('settings.permissions');
 
         foreach($permissions as $per){
-           Bouncer::allow('Admin')->to($per);
+           foreach($per as $permission){
+               Bouncer::allow('Admin')->to($permission);
+           }
         }
     }
 }

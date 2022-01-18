@@ -55,3 +55,132 @@ div#dataTable_wrapper {
 select#template {
     text-transform: capitalize;
 }
+.dd3-content {
+    display: block;
+    height: 45px;
+    padding: 5px 10px 5px 54px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    -webkit-border-radius: 3px;
+    border-radius: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.dd3-content:hover {
+    color: #4e73df;
+    background: #efefef;;
+}
+
+.dd-dragel > .dd3-item > .dd3-content {
+    margin: 0;
+}
+
+    
+.dd3-item {
+    margin: 10px 0;
+}
+.dd3-item > button {
+    margin-left: 30px;
+}
+
+.dd3-handle {
+    position: absolute;
+    margin: 0;
+    left: 0;
+    top: 0;
+    cursor: move;
+    width: 45px;
+    height: 45px;
+    text-indent: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid #aaa;
+    background-color: #4e73df;
+    background-image: linear-gradient(
+    180deg
+    , #4e73df 10%, #224abe 100%);
+    background-size: cover;
+    border-radius: 0;
+}
+
+.dd3-handle:before {
+    content: '≡';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 100%;
+    text-align: center;
+    text-indent: 0;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.dd3-handle:hover {
+   background-color: #4e73df;
+    background-image: linear-gradient(
+    180deg
+    ,#224abe 100%, #4e73df 10% );
+}
+
+.item-edit {
+    font-size: 13px;
+    float: right;
+    color: rgb(49, 35, 248);
+    cursor: pointer;
+}
+.item-edit:hover {
+    text-decoration: underline;
+}
+
+.item-settings.d-none {
+    display: none!important;
+}
+.item-settings {
+    display: block;
+    padding: 10px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    border-top: none;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.item-settings p {
+    margin-top: 0;
+}
+
+.item-settings p label {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.item-settings p label input {
+    font-size: 14px;
+}
+
+.item-settings .item-delete {
+    color: #a00;
+}
+
+
+.widget-card label {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.widget-card .form-group {
+    margin-bottom: 5px;
+}
+
+.widget-card .card-body {
+    padding: 10px 1.25rem;
+}

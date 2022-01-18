@@ -6,6 +6,7 @@ use App\Http\Controllers\Common\SettingsController;
 use App\Http\Controllers\Common\PagesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\MenuController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -79,6 +80,9 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     Route::get('/pages/{pages:id}/edit/', [PagesController::class, 'edit'])->name('pages.edit');
     Route::post('/pages/{pages:id}/update/', [PagesController::class, 'update'])->name('pages.update');
     Route::get('/pages/{pages:id}/delete', [PagesController::class, 'destroy'])->name('pages.delete');
+    // Menus    
+    Route::get('/menus/{type}', [MenuController::class, 'index'])->name('menus');
+    Route::post('/menus/add', [MenuController::class, 'store'])->name('menus.store');
 });
 
 

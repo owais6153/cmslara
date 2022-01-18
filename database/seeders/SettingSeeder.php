@@ -13,18 +13,7 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        $settings = [
-            'general' => [
-                'site_name' => env('APP_NAME', 'Laravel App'),
-                'site_title' => env('APP_NAME', 'Laravel App'),
-            ],
-            'registration' => [
-                'default_role' => 'Admin',
-                'email_verification_on_reg' => 1,
-                'allow_registrstion' => 1,
-                'allow_forget_password' => 1,
-            ]
-        ];
+        $settings = config('settings.settings');
 
         foreach ($settings as $key => $setting_V){
             $setting = new Settings();
