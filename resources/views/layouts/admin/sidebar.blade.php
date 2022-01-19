@@ -15,6 +15,73 @@
                     <span>Dashboard</span></a>
             </li>
             <hr class="sidebar-divider">
+
+            @if ( Bouncer::can('viewBlogs') || Bouncer::can('addBlogs') || Bouncer::can('viewCategories') || Bouncer::can('addCategories') )
+                <div class="sidebar-heading">
+                    Blogs & Categories
+                </div>
+                @if (Bouncer::can('viewBlogs') || Bouncer::can('addBlogs'))
+                <li class="nav-item {{(request()->is('admin/blogs/*') || request()->is('admin/blogs') ) ? 'active' : ''}}">
+                    <a class="nav-link {{(request()->is('admin/blogs/*') || request()->is('admin/blogs') ) ? '' : 'collapsed'}} " href="#" data-toggle="collapse" data-target="#blogs"
+                        aria-expanded="true" aria-controls="blogs">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>Blogs</span>
+                    </a>
+                    <div id="blogs" class="collapse {{(request()->is('admin/blogs/*') || request()->is('admin/blogs') ) ? 'show' : ''}}" aria-labelledby="All Blogs" data-parent="#accordionSidebar">
+                        <div class="bg-primary py-2 collapse-inner rounded">
+                            @can('viewBlogs')
+                            <a class="collapse-item text-light" href="{{route('blogs')}}">All Blogs</a>
+                            @endcan
+                            @can('addBlogs')
+                            <a class="collapse-item text-light" href="{{route('blogs.add')}}">Add Blog</a>
+                            @endcan
+                        </div>
+                    </div>
+                </li>
+                @endif
+                @if (Bouncer::can('viewCategories') || Bouncer::can('addCategories'))
+                <li class="nav-item {{(request()->is('admin/categories/*') || request()->is('admin/categories') ) ? 'active' : ''}}">
+                    <a class="nav-link {{(request()->is('admin/categories/*') || request()->is('admin/categories') ) ? '' : 'collapsed'}} " href="#" data-toggle="collapse" data-target="#categories"
+                        aria-expanded="true" aria-controls="categories">
+                       <i class="far fa-sticky-note"></i>
+                        <span>Categories</span>
+                    </a>
+                    <div id="categories" class="collapse {{(request()->is('admin/categories/*') || request()->is('admin/categories') ) ? 'show' : ''}}" aria-labelledby="All Categories" data-parent="#accordionSidebar">
+                        <div class="bg-primary py-2 collapse-inner rounded">
+                          
+                            <a class="collapse-item text-light" href="{{route('categories')}}">All Categories</a>
+                        </div>
+                    </div>
+                </li>
+                @endif
+                <hr class="sidebar-divider">
+            @endif
+
+
+
+            @if ( Bouncer::can('viewPages') || Bouncer::can('addPages') )
+                <div class="sidebar-heading">
+                    Pages
+                </div>
+                <li class="nav-item {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'active' : ''}}">
+                    <a class="nav-link {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? '' : 'collapsed'}} " href="#" data-toggle="collapse" data-target="#pages"
+                        aria-expanded="true" aria-controls="pages">
+                        <i class="fas fa-file"></i>
+                        <span>Pages</span>
+                    </a>
+                    <div id="pages" class="collapse {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'show' : ''}}" aria-labelledby="All Pages" data-parent="#accordionSidebar">
+                        <div class="bg-primary py-2 collapse-inner rounded">
+                            @can('viewPages')
+                            <a class="collapse-item text-light" href="{{route('pages')}}">All Pages</a>
+                            @endcan
+                            @can('addPages')
+                            <a class="collapse-item text-light" href="{{route('pages.add')}}">Add Page</a>
+                            @endcan
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+            @endif
             @if ( Bouncer::can('viewMenus') )
                 <div class="sidebar-heading">
                     Menus
@@ -40,31 +107,6 @@
                 <hr class="sidebar-divider">
             @endif
 
-            @if ( Bouncer::can('viewPages') || Bouncer::can('addPages') )
-                <div class="sidebar-heading">
-                    Pages
-                </div>
-                <li class="nav-item {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'active' : ''}}">
-                    <a class="nav-link {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? '' : 'collapsed'}} " href="#" data-toggle="collapse" data-target="#pages"
-                        aria-expanded="true" aria-controls="pages">
-                        <i class="fas fa-file"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div id="pages" class="collapse {{(request()->is('admin/pages/*') || request()->is('admin/pages') ) ? 'show' : ''}}" aria-labelledby="All Pages" data-parent="#accordionSidebar">
-                        <div class="bg-primary py-2 collapse-inner rounded">
-                            @can('viewPages')
-                            <a class="collapse-item text-light" href="{{route('pages')}}">All Pages</a>
-                            @endcan
-                            @can('addPages')
-                            <a class="collapse-item text-light" href="{{route('pages.add')}}">Add Pages</a>
-                            @endcan
-                        </div>
-                    </div>
-                </li>
-                <hr class="sidebar-divider">
-            @endif
-
-
              @if (Bouncer::can('viewUsers') || Bouncer::can('addUsers') || Bouncer::can('viewRoles') || Bouncer::can('addRoles') )
                 <div class="sidebar-heading">
                     Users & Roles
@@ -82,7 +124,7 @@
                             <a class="collapse-item text-light" href="{{route('users')}}">All Users</a>
                             @endcan
                             @can('addUsers')
-                            <a class="collapse-item text-light" href="{{route('users.add')}}">Add Users</a>
+                            <a class="collapse-item text-light" href="{{route('users.add')}}">Add User</a>
                             @endcan
                         </div>
                     </div>
@@ -101,7 +143,7 @@
                             <a class="collapse-item text-light" href="{{route('roles')}}">All Roles</a>
                             @endcan
                             @can('addRoles')
-                            <a class="collapse-item text-light" href="{{route('roles.add')}}">Add Roles</a>
+                            <a class="collapse-item text-light" href="{{route('roles.add')}}">Add Role</a>
                             @endcan
                         </div>
                     </div>
@@ -109,6 +151,7 @@
             @endif
             <hr class="sidebar-divider">
             @endif
+
             @can('accessSettings')
                 <div class="sidebar-heading">
                     Site Settings

@@ -34,6 +34,23 @@
                     @enderror
                 </div>
             </div>
+
+            <div class="col-md-6">                    
+                <div class="form-group">
+                    <label for="home_page">{{ __('Home Page*') }}</label>
+
+                    <select class="form-control" id="home_page" name="value[home_page]">
+                        <option value="default"  {{ (isset($Settings['home_page']) && $Settings['home_page'] == 'default') ? 'selected="selected"' : '' }}>Default</option>
+                        @foreach($pages as $page)
+                            <option value="{{$page->slug}}" {{ (isset($Settings['home_page']) && $Settings['home_page'] == $page->slug) ? 'selected="selected"' : '' }}>{{$page->name}}</option>
+                        @endforeach
+                    </select>
+                    @error("value.home_page")
+                        {{$message}}
+                    @enderror
+
+                </div>
+            </div>
         </div>
 
         </div>

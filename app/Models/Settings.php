@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Settings extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $table='settings';
-    protected $softDelete = true;
 
     public function get($name)
     {

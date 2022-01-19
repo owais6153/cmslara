@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Page\PageRequest;
 use App\Models\Pages;
+use App\Models\User;
 use Redirect;
 use DataTables;
 use Bouncer;
+use Route;
 class PagesController extends Controller
 {
     /**
@@ -53,7 +55,8 @@ class PagesController extends Controller
        foreach($files as $fileIndex => $file){
             $files[$fileIndex] = str_replace(".blade.php","",$file);
        }
-       return view('admin.pages.add', compact('files'));
+       $users = User::all();
+       return view('admin.pages.add', compact('files','users'));
     }
 
     /**
@@ -72,7 +75,7 @@ class PagesController extends Controller
         $page->status = $pageDetail['status'];
         $page->description = $pageDetail['description'];
         $page->short_description = $pageDetail['short_description'];
-        $page->user_id = auth()->user()->id;
+        $page->user_id = $pageDetail['user_id'];
         $page->save();
 
          return Redirect::route('pages')->with(['msg' => 'Page added', 'msg_type' => 'success']);
@@ -101,7 +104,8 @@ class PagesController extends Controller
         foreach($files as $fileIndex => $file){
             $files[$fileIndex] = str_replace(".blade.php","",$file);
         }
-        return view('admin.pages.edit', compact('pages', 'files'));
+        $users = User::all();
+        return view('admin.pages.edit', compact('pages', 'files','users'));
     }
 
     /**
@@ -121,6 +125,7 @@ class PagesController extends Controller
             'status' => $pageDetail['status'],
             'description' => $pageDetail['description'],
             'short_description' => $pageDetail['short_description'],
+            'user_id' => $pageDetail['user_id']
         ]);
         return Redirect::route('pages')->with(['msg' => 'Page Updated', 'msg_type' => 'success']);
     }
@@ -137,5 +142,6 @@ class PagesController extends Controller
         if ($page) {
             return Redirect::back()->with(['msg' => 'Page deleted', 'msg_type' => 'success']);
         }
+        abort(404);
     }
 }

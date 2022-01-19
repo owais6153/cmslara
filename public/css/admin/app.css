@@ -11509,3 +11509,15 @@ ol ol {
 .widget-card .card-body {
   padding: 10px 1.25rem;
 }
+
+.file-upload {
+  height: 100px;
+  width: 100%;
+  border: dashed 2px #ccc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  cursor: pointer;
+}

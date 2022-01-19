@@ -16,7 +16,7 @@ class MenuController extends Controller
 
         $menusArray = config('settings.menus');
         if (!in_array($type, $menusArray)) {
-            abort(404);
+            abort(404, 'Menu not exists');
         }
         $menus = Menu::where('type', $type)->where('parent_id', null)-> orderBy('order', 'asc')->get();
         $all_menus = Menu::where('type', $type)->get();

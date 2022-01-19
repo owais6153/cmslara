@@ -42,8 +42,7 @@
 
                             <div class="form-group">
                             <label for="ckeditor1">Description</label>
-                            <textarea class=" form-control @error('description') is-invalid @enderror" id="ckeditor1" placeholder="Description"  name="description">
-                            </textarea>
+                            <textarea class=" form-control @error('description') is-invalid @enderror" id="ckeditor1" placeholder="Description"  name="description">{{old('description')}}</textarea>
                             @error('description')
                                 <div class="text-danger">
                                     {{$message}}                                            
@@ -52,8 +51,7 @@
                             </div>
                             <div class="form-group">
                             <label for="short_description">Short Description</label>
-                            <textarea class="form-control @error('short_description') is-invalid @enderror" id="short_description" placeholder="Short Description" name="short_description">
-                            </textarea>
+                            <textarea class="form-control @error('short_description') is-invalid @enderror" id="short_description" placeholder="Short Description" name="short_description">{{old('short_description')}}</textarea>
                             @error('short_description')
                                 <div class="text-danger">
                                     {{$message}}                                            
@@ -98,6 +96,21 @@
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label for="user_id">Select Author*</label>
+                                <select name="user_id" id="user_id" required="" class="form-control">
+                                    <option value="">Select Author</option>
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}" {{(auth()->user()->id == $user->id) ? 'selected="selected"' : ''}}>{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                                
+                                @error('user_id')
+                                    <div class="text-danger">
+                                        {{$message}}                                            
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block px-5">
                                     {{ __('Add') }}
                                 </button>
@@ -115,14 +128,11 @@
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 <script>
-
-</script>
-<script>
     var options = {
-        filebrowserImageBrowseUrl: '{{env('FILE_MANAGER_URL')}}/filemanager?type=Images',
-        filebrowserImageUploadUrl: '{{env('FILE_MANAGER_URL')}}/filemanager/upload?type=Images&_token=',
-        filebrowserBrowseUrl: '{{env('FILE_MANAGER_URL')}}/filemanager?type=Files',
-        filebrowserUploadUrl: '{{env('FILE_MANAGER_URL')}}/filemanager/upload?type=Files&_token='
+        filebrowserImageBrowseUrl: '{{ route("unisharp.lfm.show", ["type" => "Images"])}}',
+        filebrowserImageUploadUrl: '{{ route("unisharp.lfm.upload", ["type" => "Images", "_token" => ''])}}',
+        filebrowserBrowseUrl: '{{ route("unisharp.lfm.show", ["type" => "Files"])}}',
+        filebrowserUploadUrl: '{{ route("unisharp.lfm.upload", ["type" => "Files", "_token" => ''])}}'
     };
     $(document).ready(function(){
         $('#template option:nth-child(2)').attr('selected', 'selected');        

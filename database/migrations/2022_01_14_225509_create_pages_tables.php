@@ -21,7 +21,7 @@ class CreatePagesTables extends Migration
             $table->string('short_description', 255)->nullable();
             $table->string('template', 255);
             $table->enum('status', array('published', 'draft'))->default('draft');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();

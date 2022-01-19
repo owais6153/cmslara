@@ -1,2 +1,9 @@
-userSeeder
-SettingsSeeder
+Pages
+	Parent - child
+	Page View For Only Auth
+	Featured Image
+Settings
+	Logo
+	Favicon
+User 
+	Forget Passowrd

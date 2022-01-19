@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\SettingsRequest;
 use App\Models\Settings;
+use App\Models\Pages;
 use Bouncer;
 class SettingsController extends Controller
 {
@@ -13,8 +14,9 @@ class SettingsController extends Controller
         $type = $request->type;
         $Settings = Settings::get($request->type);            
         $roles = Bouncer::role()->all()->pluck('name');
+        $pages = Pages::where('status', 'published')->get();
         if (view()->exists('admin.settings.' . $request->type)) {
-        return view('admin.settings', compact('type', 'Settings', 'roles'));            
+            return view('admin.settings', compact('type', 'Settings', 'roles', 'pages'));            
         }
         else{
             abort(404);

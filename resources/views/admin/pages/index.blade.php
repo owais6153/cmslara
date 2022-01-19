@@ -9,11 +9,6 @@
             {{session('msg')}}                                            
         </div>
         @endif
-        @error('name')
-        <div class="alert alert-danger">
-            {{$message}}                                            
-        </div>
-        @endif
          <h1 class="h3 mb-4 text-gray-800">All Pages</h1>
 
         <!-- DataTales Example -->

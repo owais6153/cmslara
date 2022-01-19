@@ -17,7 +17,7 @@ class ability
     public function handle(Request $request, Closure $next, $role)
     {   
         if (!Bouncer::can($role)) {
-            return redirect('/admin');
+            return abort('403', 'You dont have access to this page');
         }
         return $next($request);
     }

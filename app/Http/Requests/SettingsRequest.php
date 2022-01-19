@@ -16,6 +16,7 @@ class SettingsRequest extends FormRequest
         'general' => [
             'value.site_name' => 'required',
             'value.site_title' => 'required',
+            'value.home_page' => 'required',
          ],
          'registration' => [
             'value.default_role'=> 'required',

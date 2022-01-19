@@ -6,22 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pages extends Model
+class Blog extends Model
 {
-    use HasFactory;
     // use SoftDeletes;
-    protected $table='pages';
+    protected $table='blogs';
     // protected $softDelete = true;
     protected $fillable = [
         'name',
         'slug',
         'status',
-        'template',
+        'featured_image',
         'description',
         'short_description',
         'user_id',
     ];
+    use HasFactory;
     public function author(){
         return $this->hasOne(User::class,'id', 'user_id' );
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'blogs_cats', 'blog_id', 'cat_id');
     }
 }

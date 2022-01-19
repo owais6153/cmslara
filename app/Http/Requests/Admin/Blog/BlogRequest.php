@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Page;
+namespace App\Http\Requests\Admin\Blog;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ShortDescription;
-
-class PageRequest extends FormRequest
+class BlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +15,6 @@ class PageRequest extends FormRequest
     {
         return true;
     }
-
     protected function prepareForValidation()
     {
         if(!$this->has('slug')){
@@ -24,25 +22,27 @@ class PageRequest extends FormRequest
         }        
 
     }
-
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
-                'name' => 'required',
-                'slug' => 'required',
-                'template' => 'required',
-                'status' => 'required',
-                'user_id' => 'required',
-                'short_description' => [
-                    new ShortDescription(),
-                ]
-            ];
+            'name' => 'required',
+            'status' => 'required',
+            'user_id' => 'required',
+            'short_description' => [
+                new ShortDescription(),
+            ]
+        ];
     }
 
-    public function getPageData()
+    public function getBlogData()
     {
         if (($this->has('old_slug') && $this->get('old_slug') != $this->get('slug')) || !$this->has('old_slug')) {
-            $this->merge(['slug' => prepareSlug(app('App\Models\Pages'), $this->get('slug'))]);
+            $this->merge(['slug' => prepareSlug(app('App\Models\Blog'), $this->get('slug'))]);
         }
 
 
@@ -54,6 +54,7 @@ class PageRequest extends FormRequest
             'description' => ($this->has('description')) ? $this->get('description') : null ,
             'short_description' => ($this->has('short_description')) ? $this->get('description') : null,
             'user_id' => $this->get('user_id') ,
+            'featured_image' => ($this->has('featured_image')) ? $this->get('featured_image') : null ,
         ];
     }
 }

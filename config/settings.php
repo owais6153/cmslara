@@ -18,9 +18,19 @@
             ],
             'Menus' => [
                 'View Menus' =>'viewMenus',
-                'Add Menus' =>'addMenus',
-                'Update Menus' =>'updateMenus',
-                'Delete Menus' =>'deleteMenus',
+                'Add Menus' =>'addMenus'
+            ],
+            'Blogs' => [
+                'View Blogs' =>'viewBlogs',
+                'Add Blogs' =>'addBlogs',
+                'Update Blogs' =>'updateBlogs',
+                'Delete Blogs' =>'deleteBlogs',
+            ],
+            'Categories' => [
+                'View Categories' =>'viewCategories',
+                'Add Categories' =>'addCategories',
+                'Update Categories' =>'updateCategories',
+                'Delete Categories' =>'deleteCategories',
             ],
             'Users' => [
                 'View Users' =>'viewUsers',
@@ -43,6 +53,7 @@
             'general' => [
                 'site_name' => env('APP_NAME', 'Laravel App'),
                 'site_title' => env('APP_NAME', 'Laravel App'),
+                'home_page' => 'default',
             ],
             'registration' => [
                 'default_role' => 'Admin',

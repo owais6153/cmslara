@@ -103,6 +103,7 @@
                             </div>
                         </div>
                     </div>
+                    @can('viewPages')
                     <div class="card  widget-card shadow mb-4" id="">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h3 class="h5 m-0">Pages</h3>
@@ -128,8 +129,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        </div>
                     </div>
-                </div>
+                    @endcan                
                 </div>
             </div>
     </div>
