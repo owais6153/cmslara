@@ -14,10 +14,10 @@
      <code>git clone https://github.com/owais6153/cmslara.git</code>
     </li>
     <li>
-         Set DB and MAIlER in .env
+        Set DB and MAIlER in <code>.env</code>
     </li>
     <li>
-        Setup permissions and settings in config/settings.php  
+        Setup permissions and settings in <code>config/settings.php</code>
     </li>    
     <li>
      Run Migration
