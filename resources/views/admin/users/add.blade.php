@@ -70,11 +70,14 @@
                             @else
                             <input type="hidden" name="role" value="{{$Settings['default_role']}}">
                             @endif
+
                             <div class="form-group">
                                 <label for="role">Select Verfication Options*</label>
                                 <select class="form-control  @error('email_verified_at') is-invalid @enderror" name="email_verified_at" required="">
                                     <option value="">Verfication Options</option>
+                                    @if(isset($Settings['email_verification_on_reg']) && $Settings['email_verification_on_reg'] == 1)
                                     <option value="send">Send Verification Email</option>
+                                    @endif
                                     <option value="verified">Email Aleady Verified</option>
                                 </select>
                                 @error('email_verified_at')

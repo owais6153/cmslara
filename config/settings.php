@@ -6,9 +6,8 @@
     */
 	return [
 		'menus' => [
-			'primary',
+			'Primary' => 'primary',
 		],
-        'menus_max_depth' => 3,
 		'permissions' => [
             'Pages' =>[
                 'View Pages' => 'viewPages',

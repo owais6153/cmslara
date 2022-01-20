@@ -15,11 +15,11 @@ class CreateMenus extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 100);
             $table->string('link');
             $table->enum('type', config('settings.menus'))->index();
-            $table->string('attr_class')->nullable();
-            $table->string('attr_id')->nullable();
+            $table->string('attr_class', 80)->nullable();
+            $table->string('attr_id', 80)->nullable();
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('menus')->onDelete('set null');
             $table->integer('order')->nullable();

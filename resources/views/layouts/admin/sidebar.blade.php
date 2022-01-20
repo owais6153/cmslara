@@ -97,8 +97,8 @@
                     <div id="menus" class="collapse {{(request()->is('admin/menus/*') || request()->is('admin/menus') ) ? 'show' : ''}}" aria-labelledby="All Menus" data-parent="#accordionSidebar">
                         <div class="bg-primary py-2 collapse-inner rounded">
                             @can('viewMenus')
-                                @foreach(config('settings.menus') as $menu)
-                                    <a class="collapse-item text-light" href="{{route('menus', ['type' => $menu])}}">{{$menu}}</a>
+                                @foreach(config('settings.menus') as $menu_name => $menu)
+                                    <a class="collapse-item text-light" href="{{route('menus', ['type' => $menu])}}">{{$menu_name}}</a>
                                 @endforeach
                             @endcan
                         </div>

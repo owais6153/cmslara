@@ -92,7 +92,7 @@
                         </div>
                     </div>                    
 
-                    @empty(!$categories)
+                    @if($categories->count())
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h1 class="h5  text-gray-800 m-0">Categories</h1>

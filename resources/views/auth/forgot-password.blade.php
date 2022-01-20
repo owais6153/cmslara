@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.admin.app', ['body_class' => 'bg-gradient-primary', 'title' => 'Forget Passsword', 'sidebar' => false, 'topbar' => false])
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

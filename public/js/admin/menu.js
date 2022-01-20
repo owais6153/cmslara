@@ -24,9 +24,15 @@
         $(this).closest(".dd-item").data("attr_id", $(this).val());
     });
     $("body").delegate(".item-delete", "click", function (e) {
-        $(this).closest(".dd-item").data("delete", true);
-        updateOutput();
-        $(this).closest(".dd-item").remove();
+        let res = true;
+        if ($(this).closest(".dd-item").find('ol').length > 0)
+            res = confirm('Deleteing parent menu will cause its child to deleted');
+
+        if (res) {        
+            $(this).closest(".dd-item").data("delete", true);
+            updateOutput();
+            $(this).closest(".dd-item").remove();
+        }
     });
     $('#nestable').nestable().on('change', updateOutput);
     updateOutput();

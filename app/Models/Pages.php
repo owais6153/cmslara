@@ -20,6 +20,7 @@ class Pages extends Model
         'description',
         'short_description',
         'user_id',
+        'featured_image'
     ];
     public function author(){
         return $this->hasOne(User::class,'id', 'user_id' );

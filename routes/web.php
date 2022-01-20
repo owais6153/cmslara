@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Common\SettingsController;
 use App\Http\Controllers\Common\BlogController;
@@ -9,8 +11,6 @@ use App\Http\Controllers\Common\PagesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\MenuController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,28 +26,35 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+// Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/verification', [AuthController::class, 'verificationNotice'])->name('verification.notice')->middleware('auth');
+
+// Email Verification
+Route::get('/verification', [AuthController::class, 'verificationNotice'])->name('verification.notice')->middleware(['auth', 'shouldVerifyEmail']);
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/admin')->with(['msg' => 'Thanks for registration', 'msg_type' => 'success']);
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['auth', 'signed', 'shouldVerifyEmail'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1', 'shouldVerifyEmail'])->name('verification.send');
 
+// Forogot Password
+Route::get('/forgot-password', [AuthController::class, 'forgetPassword'])->middleware(['guest', 'shouldPasswordReset'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'forgetPasswordEmail'])->middleware(['guest', 'shouldPasswordReset'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'resetPaassword'])->middleware(['guest', 'shouldPasswordReset'])->name('password.reset');
+Route::post('/reset-password',[AuthController::class, 'paasswordUpdate'])->middleware(['guest', 'shouldPasswordReset'])->name('password.update');
+
+// Registration
 Route::middleware(['AllowedRegistration'])->group( function () {
     Route::view('/register','auth.register')->name('register');
     Route::post('/user/register',[AuthController::class, 'register'])->name('register.user');
 });
 
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
+// File manager
 Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth']], function () {
      \UniSharp\LaravelFilemanager\Lfm::routes();
 });
@@ -55,7 +62,7 @@ Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth']], funct
 // Admin
 Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->group( function () {
     // Dashboard
-    Route::view('/', 'admin.home')->name('admin');
+    Route::get('/', [AuthController::class, 'dashboard'])->name('admin');
 
     // Settings
     Route::get('/settings/{type}', [SettingsController::class, 'index'])->name('settings')->middleware('role:accessSettings');
@@ -110,7 +117,7 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     Route::get('/categories/{category:id}/delete', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('role:deleteCategories');
 });
 
-
+// Front Temp
 Route::get('/{slug}', [PagesController::class, 'index'])->name('pages.front');
 Route::get('/blog/{slug}', [PagesController::class, 'index'])->name('blogs.front');
 Route::get('/category/{slug}', [PagesController::class, 'index'])->name('categories.front');

@@ -30,7 +30,7 @@ class PageRequest extends FormRequest
         return [
                 'name' => 'required',
                 'slug' => 'required',
-                'template' => 'required',
+                'template' => 'required|max:100',
                 'status' => 'required',
                 'user_id' => 'required',
                 'short_description' => [
@@ -54,6 +54,7 @@ class PageRequest extends FormRequest
             'description' => ($this->has('description')) ? $this->get('description') : null ,
             'short_description' => ($this->has('short_description')) ? $this->get('description') : null,
             'user_id' => $this->get('user_id') ,
+            'featured_image' => ($this->has('featured_image')) ? $this->get('featured_image') : null ,
         ];
     }
 }

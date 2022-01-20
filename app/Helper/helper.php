@@ -10,9 +10,8 @@ if (!function_exists('getRouteArray')) {
         {
             $parts = explode('/', $route->uri());
             foreach ($parts as $part)
-            {
-                $slug    = trim($part, '{}?');
-                $slugs[] = $slug;
+            {               
+                $slugs[] = $part;
             }
         }
         return $slugs;

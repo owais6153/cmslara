@@ -76,6 +76,7 @@ class PagesController extends Controller
         $page->description = $pageDetail['description'];
         $page->short_description = $pageDetail['short_description'];
         $page->user_id = $pageDetail['user_id'];
+        $page->featured_image = $pageDetail['featured_image'];
         $page->save();
 
          return Redirect::route('pages')->with(['msg' => 'Page added', 'msg_type' => 'success']);
@@ -125,7 +126,8 @@ class PagesController extends Controller
             'status' => $pageDetail['status'],
             'description' => $pageDetail['description'],
             'short_description' => $pageDetail['short_description'],
-            'user_id' => $pageDetail['user_id']
+            'user_id' => $pageDetail['user_id'],
+            'featured_image' => $pageDetail['featured_image']
         ]);
         return Redirect::route('pages')->with(['msg' => 'Page Updated', 'msg_type' => 'success']);
     }

@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\ability::class,
         'CanAccessDashboard' => \App\Http\Middleware\CanAccessDashboard::class,
         'AllowedRegistration' => \App\Http\Middleware\AllowedRegistration::class,
+        'shouldVerifyEmail' => \App\Http\Middleware\shouldVerifyEmail::class,
+        'shouldPasswordReset' => \App\Http\Middleware\shouldPasswordReset::class,
     ];
 }

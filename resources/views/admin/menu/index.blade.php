@@ -11,10 +11,6 @@
             {{session('msg')}}                                            
         </div>
         @endif
-   
-         
-
-
             <div class="row">
                 <div class="col-md-8">
                     <div class="card shadow mb-4" id="menusBack">

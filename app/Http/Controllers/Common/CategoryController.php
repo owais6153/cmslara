@@ -95,7 +95,7 @@ class CategoryController extends Controller
     {
         $category = Category::where('id', $id)->delete();
         if ($category) {
-            return Redirect::back()->with(['msg' => 'Category deleted', 'msg_type' => 'success']);
+            return Redirect::route('categories')->with(['msg' => 'Category deleted', 'msg_type' => 'success']);
         }
         abort(404);
     }
