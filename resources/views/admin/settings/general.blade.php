@@ -51,8 +51,52 @@
 
                 </div>
             </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">                    
+                <div class="form-group">
+                    <label for="site_logo_preview">Site Logo (<small ><a class="text-danger" href="javascript:void(0)" onclick="removeImage('#site_logo', '#site_logo_preview', 'Logo');">Remove</a></small>)</label>
+                    <div class="lfm file-upload" id="site_logo_preview" data-input="site_logo" data-preview="site_logo_preview">
+                    @if(isset($Settings['site_logo']))
+                    <img src="{{$Settings['site_logo']}}" style="height: 5rem;">
+                    @else
+                    Logo
+                    @endif
+                </div>
+                    <input type="hidden" name="value[site_logo]" value="{{(isset($Settings['site_logo'])) ?$Settings['site_logo'] : '' }}" id="site_logo">
+                    @error("value.site_logo")
+                        {{$message}}
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">                    
+                <div class="form-group">
+                    <label for="site_fav_preview">Site Fav Icon(<small ><a class="text-danger" href="javascript:void(0)" onclick="removeImage('#site_fav', '#site_fav_preview', 'Fav Icon');">Remove</a></small>)</label>
+                    <div class="site_fav lfm file-upload" id="site_fav_preview" data-input="site_fav" data-preview="site_fav_preview"> @if(isset($Settings['site_fav']))
+                    <img src="{{$Settings['site_fav']}}" style="height: 5rem;">
+                    @else
+                    Fav Icon
+                    @endif</div>
+                    <input type="hidden" name="value[site_fav]" id="site_fav" value="{{(isset($Settings['site_fav'])) ?$Settings['site_fav'] : '' }}">
+                    @error("value.site_fav")
+                        {{$message}}
+                    @enderror
+
+                </div>
+            </div>
         </div>
 
         </div>
     </div>
 </form>
+
+@section('scripts')
+    <script src="{{ asset('/vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+    <script type="text/javascript">
+    var route_prefix = "{{route('unisharp.lfm.show')}}";
+    $('.lfm').filemanager('image', {prefix: route_prefix});
+    function removeImage(input, placeholder, text = 'Upload') {
+        $(input).val('');
+        $(placeholder).html(text)
+    }
+    </script>
+@endsection

@@ -30,7 +30,7 @@ class RoleController extends Controller
         ->addColumn('action', function($row){
             $actionBtn = "";
             // if($row->id != Session::get('id') && $row->id != 1){
-                if(Bouncer::can('updateRoles')){
+                if(Bouncer::can('updateRoles') && $row->id != 1){
                     $actionBtn .='<a href="' . route('roles.edit', ['id' => $row->id]) . '" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
                 }
                 if(Bouncer::can('deleteUsers') && $row->id != 1){
@@ -79,6 +79,7 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
+        if ($id != 1):
         $validated = $request->validate([
             'name' => 'required|max:255',
         ]);      
@@ -93,6 +94,9 @@ class RoleController extends Controller
             }
         }
         return Redirect::route('roles')->with(['msg' => 'Roles Updated', 'msg_type' => 'success']);
+        else:
+            abort(404);
+        endif;
 
     }
 

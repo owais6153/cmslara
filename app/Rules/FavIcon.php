@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Rules;
+
+use Illuminate\Contracts\Validation\Rule;
+use Image;
+class FavIcon implements Rule
+{
+    /**
+     * Create a new rule instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Determine if the validation rule passes.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @return bool
+     */
+    public function passes($attribute, $value)
+    {
+        if (!empty($value)) {
+            $val = explode('storage/', $value);
+            $path =\Storage::disk('public')->path($val[1]);
+            $image = file_get_contents($path);
+            $height = Image::make($image)->height();
+            $width = Image::make($image)->width();
+            if ($height != 50 || $width != 50) {
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            // Not Required
+            // False for required
+            return true;
+        }
+
+    }
+
+    /**
+     * Get the validation error message.
+     *
+     * @return string
+     */
+    public function message()
+    {
+        return 'The fav icon size shouold be 50x50';
+    }
+}

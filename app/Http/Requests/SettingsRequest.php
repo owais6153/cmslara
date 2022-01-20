@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Rules\FavIcon;
 class SettingsRequest extends FormRequest
 {
     /**
@@ -11,42 +11,29 @@ class SettingsRequest extends FormRequest
      *
      * @return bool
      */
-
-    public $fieldsForValidation = array(
-        'general' => [
-            'value.site_name' => 'required',
-            'value.site_title' => 'required',
-            'value.home_page' => 'required',
-         ],
-         'registration' => [
-            'value.default_role'=> 'required',
-         ]
-    );
-    public $selectedFieldsForValidation = array();
     
     public function authorize()
     {
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        if (!empty($this->get('name'))) {
-            $this->selectedFieldsForValidation = (isset($this->fieldsForValidation[$this->get('name')])) ? $this->fieldsForValidation[$this->get('name')] : array();            
-        }
 
-        $this->selectedFieldsForValidation['name'] = 'required';
-
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        return $this->selectedFieldsForValidation;
+        return [
+            'name' => 'required',
+            // General
+            'value.site_name' => 'exclude_unless:name,general|required',
+            'value.site_title' => 'exclude_unless:name,general|required',
+            'value.home_page' => 'exclude_unless:name,general|required',
+            'value.site_fav' => [
+                'exclude_unless:name,general',
+                new FavIcon()
+            ],
+            // Regestration
+            'value.default_role'=> 'exclude_unless:name,registration|required',
+
+        ];
     }
 
     public function getSettings()

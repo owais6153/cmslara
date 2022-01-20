@@ -1,5 +1,3 @@
-Settings
-	Logo
-	Favicon
-	Blog Page
-
+404
+Notifications
+Html strip
