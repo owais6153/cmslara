@@ -13,6 +13,14 @@
      Run Command
      <code>git clone https://github.com/owais6153/cmslara.git</code>
     </li>
+     <li>
+     Run Command
+     <code>composer install</code>
+    </li>
+     <li>
+     Run Command
+     <code>npm install</code>
+    </li>
     <li>
         Set DB and MAIlER in <code>.env</code>
     </li>
