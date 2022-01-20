@@ -4,7 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Str;
 class Handler extends ExceptionHandler
 {
     /**
@@ -38,7 +39,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    protected function getHttpExceptionView(HttpExceptionInterface $e)
+    {
+        $adminErrorView = "admin.errors.{$e->getStatusCode()}";
 
+        if (Str::is('admin*', request()->path())) {
+            if (view()->exists($adminErrorView)) {
+                return $adminErrorView;
+            }
+        }
+
+        return "errors::{$e->getStatusCode()}";
+    }
 
 
 }

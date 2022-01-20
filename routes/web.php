@@ -117,7 +117,3 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     Route::get('/categories/{category:id}/delete', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('role:deleteCategories');
 });
 
-// Front Temp
-Route::get('/{slug}', [PagesController::class, 'index'])->name('pages.front');
-Route::get('/blog/{slug}', [PagesController::class, 'index'])->name('blogs.front');
-Route::get('/category/{slug}', [PagesController::class, 'index'])->name('categories.front');

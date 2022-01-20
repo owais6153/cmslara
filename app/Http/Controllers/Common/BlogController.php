@@ -11,6 +11,7 @@ use App\Models\User;
 use DataTables;
 use Bouncer;
 use Redirect;
+use Route;
 class BlogController extends Controller
 {
     /**
@@ -27,7 +28,11 @@ class BlogController extends Controller
        $model = Blog::query();
         return DataTables::eloquent($model)
         ->addColumn('action', function($row){
-            $actionBtn = '<a class="btn-circle btn btn-sm btn-primary mr-1" href="' .route('blogs.front', ['slug' => $row->slug]). '"><i class="fas fa-eye"></i></a>';
+            $actionBtn = '';
+            if (Route::has('blogs.front')) {
+               
+             $actionBtn = '<a class="btn-circle btn btn-sm btn-primary mr-1" href="' .route('blogs.front', ['slug' => $row->slug]). '"><i class="fas fa-eye"></i></a>';
+            }
                 if(Bouncer::can('updateBlogs')){
                     $actionBtn .='<a href="' . route('blogs.edit', ['blog' => $row->id]) . '" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
                 }

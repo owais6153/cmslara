@@ -52,7 +52,7 @@ class BlogRequest extends FormRequest
             'template' => $this->get('template'),
             'status' => $this->get('status'),
             'description' => ($this->has('description')) ? $this->get('description') : null ,
-            'short_description' => ($this->has('short_description')) ? $this->get('description') : null,
+            'short_description' => ($this->has('short_description')) ? $this->get('short_description') : null,
             'user_id' => $this->get('user_id') ,
             'featured_image' => ($this->has('featured_image')) ? $this->get('featured_image') : null ,
         ];

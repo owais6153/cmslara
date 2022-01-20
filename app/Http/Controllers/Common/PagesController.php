@@ -29,7 +29,10 @@ class PagesController extends Controller
         $model = Pages::query();
         return DataTables::eloquent($model)
         ->addColumn('action', function($row){
+             $actionBtn = '';
+            if (Route::has('pages.front')) {
             $actionBtn = '<a class="btn-circle btn btn-sm btn-primary mr-1" href="' .route('pages.front', ['slug' => $row->slug]). '"><i class="fas fa-eye"></i></a>';
+            }
                 if(Bouncer::can('updatePages')){
                     $actionBtn .='<a href="' . route('pages.edit', ['pages' => $row->id]) . '" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
                 }

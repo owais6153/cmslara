@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Category\CategoryRequest;
 use DataTables;
 use Redirect;
 use Bouncer;
+use Route;
 class CategoryController extends Controller
 {
     /**
@@ -25,7 +26,10 @@ class CategoryController extends Controller
         $model = Category::query();
         return DataTables::eloquent($model)
         ->addColumn('action', function($row){
+             $actionBtn = '';
+            if (Route::has('pages.front')) {
             $actionBtn = '<a class="btn-circle btn btn-sm btn-primary mr-1" href="' .route('categories.front', ['slug' => $row->slug]). '"><i class="fas fa-eye"></i></a>';
+        }
                 if(Bouncer::can('updateCategories')){
                     $actionBtn .='<a href="' . route('categories.edit', ['category' => $row->id]) . '" class="mr-1 btn btn-circle btn-sm btn-info"><i class="fas fa-pencil-alt"></i></a>';
                 }
