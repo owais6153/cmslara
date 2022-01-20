@@ -1,9 +1,9 @@
-@extends('layouts.admin.app', ['dashboard_nav' => true, 'title' => '404 not found'])
+@extends('layouts.admin.app', ['dashboard_nav' => true, 'title' => '404 not found', 'topbar' => false])
 
 @section('content')
-    <div class="container">
+    <div class="container pt-5">
 
-        <div class="text-center">
+        <div class="text-center pt-5">
             <div class="error mx-auto" data-text="404">404</div>
             <p class="lead text-gray-800 mb-5">Page Not Found</p>
             
