@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Pages;
+use App\Models\Blog;
+use App\Models\Category;
 use App\Http\Requests\Admin\MenuRequest;
 use Redirect;
 
@@ -21,7 +23,9 @@ class MenuController extends Controller
         $menus = Menu::where('type', $type)->where('parent_id', null)-> orderBy('order', 'asc')->get();
         $all_menus = Menu::where('type', $type)->get();
         $pages = Pages::where('status', 'published')->get();
-        return view('admin.menu.index', compact('menus', 'pages', 'all_menus'));
+        $blogs = Blog::where('status', 'published')->get();
+        $categories = Category::all();
+        return view('admin.menu.index', compact('menus', 'pages', 'blogs', 'categories', 'all_menus'));
     }
 
     public function add($menu, $type, $parent = null)

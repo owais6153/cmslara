@@ -83,6 +83,25 @@
 
                 </div>
             </div>
+            <div class="col-md-12">                    
+                <div class="form-group">
+                    <label for="header_scripts">{{ __('Header Scripts*') }}</label>
+                    <textarea style="height: 150px" name="value[header_scripts]" id="header_scripts" class="form-control  @error('value.header_scripts') is-invalid @enderror" >@if(old('value.header_scripts')){{old('value.header_scripts')}}@else{{ (isset($Settings['header_scripts'])) ? $Settings['header_scripts'] : '' }}@endif</textarea>
+                    @error("value.header_scripts")
+                        {{$message}}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col-md-12">                    
+                <div class="form-group">
+                    <label for="footer_scripts">{{ __('Footer Scripts*') }}</label>
+                    <textarea style="height: 150px" name="value[footer_scripts]" id="footer_scripts" class="form-control  @error('value.footer_scripts') is-invalid @enderror" >@if(old('value.footer_scripts')){{old('value.footer_scripts')}}@else{{ (isset($Settings['footer_scripts'])) ? $Settings['footer_scripts'] : '' }}@endif</textarea>
+                    @error("value.footer_scripts")
+                        {{$message}}
+                    @enderror
+                </div>
+            </div>
         </div>
 
         </div>

@@ -18,6 +18,9 @@ class Blog extends Model
         'featured_image',
         'description',
         'short_description',
+        'meta_title',
+        'meta_keyword',
+        'meta_description',
         'user_id',
     ];
     use HasFactory;

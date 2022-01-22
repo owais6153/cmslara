@@ -36,13 +36,36 @@
 			            		@enderror
 			            	</div>
 			            	<div class="form-group">
+			            		<label for="parent_id">Parent Category</label>
+			            		<select name="parent_id" id="parent_id" class="form-control @error('parent_id') is-invalid @enderror">
+			            			<option value="">Select Parent Category</option>
+			            			@foreach($parent_cats as $parent)
+			            				<option value="{{$parent->id}}">{{$parent->name}}</option>
+			            			@endforeach
+			            		</select>
+			            		@error('parent_id')
+			            			{{$message}}
+			            		@enderror
+			            	</div>
+			            	<div class="form-group">
 			            		<label for="description">Description</label>
 			            		<textarea style="height: 100px;" type="text" name="description" id="description" placeholder="Description" class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
 			            		@error('description')
 			            			{{$message}}
 			            		@enderror
 			            	</div>
-			            	 <div class="form-group">
+
+                            <input type="hidden" id="featured_image" name="featured_image">
+                            <div class="file-upload" id="lfm" data-input="featured_image" data-preview="lfm" >
+                                Upload Image
+                            </div>
+                            @error('featured_image')
+                                <div class="text-danger">
+                                    {{$message}}                                            
+                                </div>
+                            @endif
+                            <a href="javascript:void(0)" class="text-danger mt-2 d-inline-block" onclick="removeImage()">Remove Image</a>
+			            	 <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-primary btn-block px-5">
                                     {{ __('Add') }}
                                 </button>
@@ -65,6 +88,8 @@
 			                        <tr>
 		                            <th scope="col">ID</th>
 							      <th scope="col">Category Name</th>
+							      <th scope="col">Total Blogs</th>
+								  <th scope="col">Parent</th>
 							      <th scope="col">Action</th>
 								    </tr>
 		                        </thead>
@@ -72,6 +97,8 @@
 			                        <tr>
 		                            <th scope="col">ID</th>
 							      <th scope="col">Category Name</th>
+							      <th scope="col">Total Blogs</th>
+								  <th scope="col">Parent</th>
 							      <th scope="col">Action</th>
 								    </tr>
 		                        </tfoot>
@@ -87,6 +114,7 @@
     </div>
 @endsection
 @section('scripts')
+<script src="{{ asset('/vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 	<script type="text/javascript">
 		$(document).ready( function () {
 		   $.ajaxSetup({
@@ -105,6 +133,8 @@
 		         columns: [
 		                  { data: 'id', name: 'id', 'visible': false},
 		                  { data: 'name', name: 'name' },
+		                  { data: 'count', name: 'count' },
+		                  { data: 'parent', name: 'parent' },
 		                  { data: 'action', name: 'action', orderable: true,searchable: true}
 		               ],
 		        order: [[0, 'desc']]
@@ -119,5 +149,11 @@
             }
         })
 		});
+		    var route_prefix = "{{route('unisharp.lfm.show')}}";
+    $('#lfm').filemanager('image', {prefix: route_prefix});
+    function removeImage() {
+        $('#featured_image').val('');
+        $('#lfm').html('Upload')
+    }
 	</script>
 @endsection

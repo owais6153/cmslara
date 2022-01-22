@@ -19,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $parent_cats = Category::all();
+        return view('admin.category.index', compact('parent_cats'));
     }
     public function getCategory()
     {
@@ -38,6 +39,13 @@ class CategoryController extends Controller
                 }
                 return $actionBtn;
         })
+        ->addColumn('count', function($row){
+            return $row->blogs()->count();
+        })
+        ->addColumn('parent', function($row){
+            $par = $row->parent()->select('name')->first();
+            return $par['name'];
+        })
         ->rawColumns(['action'])
         ->toJson();
     }
@@ -50,6 +58,8 @@ class CategoryController extends Controller
         $Category->name = $CategoryRequest['name'];
         $Category->slug = $CategoryRequest['slug'];
         $Category->description = $CategoryRequest['description'];
+        $Category->featured_image = $CategoryRequest['featured_image'];
+        $Category->parent_id = $CategoryRequest['parent_id'];
         $Category->save();
         return Redirect::route('categories')->with(['msg' => 'Category added', 'msg_type' => 'success']);
     }
@@ -67,7 +77,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit', compact('category'));        
+
+        $parent_cats = Category::all();
+        return view('admin.category.edit', compact('category', 'parent_cats'));        
     }
 
     /**
@@ -84,6 +96,7 @@ class CategoryController extends Controller
             'name' => $CategoryRequest['name'],
             'slug' => $CategoryRequest['slug'],
             'description' => $CategoryRequest['description'],
+            'featured_image' => $CategoryRequest['featured_image'],
         ]);
         return Redirect::route('categories')->with(['msg' => 'Category Updated', 'msg_type' => 'success']);
     }

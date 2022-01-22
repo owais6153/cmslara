@@ -34,16 +34,25 @@
                             <h3 class="h3 mb-4">Permisions</h3>
 
                             @foreach(config('settings.permissions') as $key => $permissions)
-                                <h4 class="h5 mt-4">{{$key}}</h4>
-                                <div class="form-group mb-4 d-flex">
-                                @foreach($permissions as $name => $permission)
-                                <div class="custom-control custom-checkbox mr-3 small">
-                                    <input id="{{$permission}}" type="checkbox" class=" custom-control-input " name="permission[{{$permission}}]" {!! in_array($permission ,$abilitiesarray) == true ?"checked":"" !!}  value="1" >
-                                    <label for="{{$permission}}" class="custom-control-label">
-                                        {{$name}}
-                                    </label>
-                                </div>
-                                @endforeach
+                                <div class="role-permission">
+                                    <h4 class="h5 mt-4">
+                                        <div class="custom-control custom-checkbox mr-3">
+                                            <input type="checkbox" id="{{$key}}" class=" custom-control-input " name="{{$key}}">
+                                            <label for="{{$key}}" class=" h5 custom-control-label">
+                                                {{$key}}
+                                            </label>
+                                        </div>
+                                    </h4>
+                                    <div class="form-group mb-4 d-flex">
+                                    @foreach($permissions as $name => $permission)
+                                    <div class="custom-control custom-checkbox mr-3 small">
+                                        <input id="{{$permission}}" type="checkbox" class=" custom-control-input " name="permission[{{$permission}}]" {!! in_array($permission ,$abilitiesarray) == true ?"checked":"" !!}  value="1" >
+                                        <label for="{{$permission}}" class="custom-control-label">
+                                            {{$name}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                    </div>
                                 </div>
                                 <hr class="sidebar-divider">
                             @endforeach
@@ -65,3 +74,15 @@
 
 
 
+@section('scripts')
+    <script type="text/javascript">    
+        $('.role-permission h4 input[type="checkbox"]').change(function () {
+            if($(this).is(':checked')){
+                $(this).parents('.role-permission').find('input[type="checkbox"]').prop('checked', 'checked');
+            }
+            else{
+                $(this).parents('.role-permission').find('input[type="checkbox"]').prop('checked', false);
+            }
+        })
+    </script>
+@endsection

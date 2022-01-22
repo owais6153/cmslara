@@ -19,6 +19,9 @@ class Pages extends Model
         'template',
         'description',
         'short_description',
+        'meta_title',
+        'meta_keyword',
+        'meta_description',
         'user_id',
         'featured_image'
     ];

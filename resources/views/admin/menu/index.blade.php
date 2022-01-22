@@ -128,6 +128,66 @@
                         </div>
                     </div>
                     @endcan                
+
+                    @can('viewBlogs')
+                    <div class="card  widget-card shadow mb-4" id="">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h3 class="h5 m-0">Blogs</h3>
+                        </div>
+                        <div class="card-body ">
+                        @foreach($blogs as $blog)
+                            <div class="card widget-card mb-2">
+                                <a href="#blog{{$blog->id}}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="blog{{$blog->id}}">
+                                    <h6 class="m-0 font-weight-bold text-primary">{{$blog->name}}</h6>
+                                </a>
+                                <div class="collapse" id="blog{{$blog->id}}" style="">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="link">Link</label>
+                                            <input type="text" readonly="" class="form-control title" name="link" value="{{$blog->slug}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="javascript:void(0)" class="btn btn-info" onclick="addLink('{{$blog->name}}', '{{$blog->slug}}')">
+                                                Add to Menu
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+                    @endcan  
+
+                    @can('viewCategories')
+                    <div class="card  widget-card shadow mb-4" id="">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h3 class="h5 m-0">Categories</h3>
+                        </div>
+                        <div class="card-body ">
+                        @foreach($categories as $category)
+                            <div class="card widget-card mb-2">
+                                <a href="#category{{$category->id}}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="category{{$category->id}}">
+                                    <h6 class="m-0 font-weight-bold text-primary">{{$category->name}}</h6>
+                                </a>
+                                <div class="collapse" id="category{{$category->id}}" style="">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="link">Link</label>
+                                            <input type="text" readonly="" class="form-control title" name="link" value="{{$category->slug}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="javascript:void(0)" class="btn btn-info" onclick="addLink('{{$category->name}}', '{{$category->slug}}')">
+                                                Add to Menu
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+                    @endcan  
                 </div>
             </div>
     </div>

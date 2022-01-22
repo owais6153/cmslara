@@ -55,7 +55,7 @@ class BlogController extends Controller
     public function create()
     { 
         $users = User::all();
-        $categories = Category::all();
+        $categories = Category::where('parent_id', null)->get();
         return view('admin.blogs.add', compact('users', 'categories'));//
     }
 
@@ -75,6 +75,9 @@ class BlogController extends Controller
         $blog->status = $blogDetail['status'];
         $blog->description = $blogDetail['description'];
         $blog->short_description = $blogDetail['short_description'];
+        $blog->meta_title = $blogDetail['meta_title'];
+        $blog->meta_keyword = $blogDetail['meta_keyword'];
+        $blog->meta_description = $blogDetail['meta_description'];
         $blog->user_id = $blogDetail['user_id'];
         $blog->save();
         if($request->has('cat'))
@@ -92,7 +95,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $users = User::all();
-        $categories = Category::all();
+        $categories = Category::where('parent_id', null)->get();
         return view('admin.blogs.edit', compact('blog', 'users', 'categories'));
     }
 
@@ -113,6 +116,9 @@ class BlogController extends Controller
             'status' => $blogDetail['status'],
             'description' => $blogDetail['description'],
             'short_description' => $blogDetail['short_description'],
+            'meta_title' => $blogDetail['meta_title'],
+            'meta_keyword' => $blogDetail['meta_keyword'],
+            'meta_description' => $blogDetail['meta_description'],
             'user_id' => $blogDetail['user_id']
         ]);
         if($request->has('cat'))

@@ -12,7 +12,7 @@
 
         <form action="{{route('users.update')}}" method="POST" autocomplete="off">
                @csrf
-               <input type="hidden" name="id" value="{{request('id')}}">
+               <input type="hidden" name="id" value="{{$user->id}}">
             <div class="row">
                 <div class="col-md-9">
                     <div class="card shadow mb-4">
@@ -42,7 +42,7 @@
 
                             <div class="form-group">
                             <label for="exampleInputPassword1">Password*</label>
-                            <input type="password" required="" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Password" name="password" value="">
+                            <input type="password"  class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Password" name="password" value="">
                             @error('password')
                                 <div class="text-danger">
                                     {{$message}}                                            

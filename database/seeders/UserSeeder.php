@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = 'admin';
+        $user->name = 'Admin';
         $user->email = 'admin@gmail.com';
         $user->password = Hash::make('@Admin!23#');
         $user->email_verified_at = date("Y-m-d",time());

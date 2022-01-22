@@ -55,6 +55,9 @@ class PageRequest extends FormRequest
             'short_description' => ($this->has('short_description')) ? $this->get('short_description') : null,
             'user_id' => $this->get('user_id') ,
             'featured_image' => ($this->has('featured_image')) ? $this->get('featured_image') : null ,
+            'meta_title' => ($this->has('meta_title')) ? $this->get('meta_title') : null ,
+            'meta_keyword' => ($this->has('meta_keyword')) ? $this->get('meta_keyword') : null ,
+            'meta_description' => ($this->has('meta_description')) ? $this->get('meta_description') : null 
         ];
     }
 }

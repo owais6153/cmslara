@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ShortDescription;
+use App\Rules\CatDepth;
 class CategoryRequest extends FormRequest
 {
     /**
@@ -34,6 +35,9 @@ class CategoryRequest extends FormRequest
             'slug' => 'required',
             'description' => [
                 new ShortDescription(),
+            ],
+            'parent_id' => [
+                new CatDepth(),
             ]
         ];
     }
@@ -48,6 +52,8 @@ class CategoryRequest extends FormRequest
             'name' => $this->get('name'),
             'slug' =>  \Str::slug($this->get('slug')),
             'description' => ($this->has('description')) ? $this->get('description') : null ,
+            'featured_image' => ($this->has('featured_image')) ? $this->get('featured_image') : null ,
+            'parent_id' => ($this->has('parent_id')) ? $this->get('parent_id') : null ,
         ];
     }
 }

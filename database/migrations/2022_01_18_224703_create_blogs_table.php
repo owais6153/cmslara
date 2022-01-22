@@ -19,6 +19,9 @@ class CreateBlogsTable extends Migration
             $table->string('slug',  255)->unique();
             $table->longText('description', 255)->nullable();
             $table->string('short_description', 255)->nullable();
+            $table->string('meta_title', 100)->nullable();
+            $table->string('meta_keyword', 255)->nullable();
+            $table->string('meta_description', 200)->nullable();
             $table->string('featured_image')->nullable();
             $table->enum('status', array('published', 'draft'))->default('draft');
             $table->bigInteger('user_id')->unsigned()->nullable();
@@ -31,6 +34,9 @@ class CreateBlogsTable extends Migration
             $table->string('name', 255);            
             $table->string('slug',  255)->unique();
             $table->string('description', 255)->nullable();
+            $table->string('featured_image')->nullable();
+            $table->bigInteger('parent_id')->unsigned()->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

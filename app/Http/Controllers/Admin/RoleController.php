@@ -61,6 +61,9 @@ class RoleController extends Controller
                Bouncer::allow($request->name)->to($key);
             }  
         }
+        else{
+            Bouncer::allow($request->name)->to('noPermission');
+        }
        return Redirect::route('roles')->with(['msg' => 'Roles Created', 'msg_type' => 'success']);
     }
 
@@ -92,6 +95,9 @@ class RoleController extends Controller
             foreach($request->permission as $key => $value){
                 Bouncer::allow($role)->to($key);         
             }
+        }
+        else{
+            Bouncer::allow($request->name)->to('noPermission');
         }
         return Redirect::route('roles')->with(['msg' => 'Roles Updated', 'msg_type' => 'success']);
         else:

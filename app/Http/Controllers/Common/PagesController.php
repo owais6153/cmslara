@@ -78,6 +78,9 @@ class PagesController extends Controller
         $page->status = $pageDetail['status'];
         $page->description = $pageDetail['description'];
         $page->short_description = $pageDetail['short_description'];
+        $page->meta_title = $pageDetail['meta_title'];
+        $page->meta_keyword = $pageDetail['meta_keyword'];
+        $page->meta_description = $pageDetail['meta_description'];
         $page->user_id = $pageDetail['user_id'];
         $page->featured_image = $pageDetail['featured_image'];
         $page->save();
@@ -129,6 +132,9 @@ class PagesController extends Controller
             'status' => $pageDetail['status'],
             'description' => $pageDetail['description'],
             'short_description' => $pageDetail['short_description'],
+            'meta_title' => $pageDetail['meta_title'],
+            'meta_keyword' => $pageDetail['meta_keyword'],
+            'meta_description' => $pageDetail['meta_description'],
             'user_id' => $pageDetail['user_id'],
             'featured_image' => $pageDetail['featured_image']
         ]);

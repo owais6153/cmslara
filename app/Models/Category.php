@@ -13,7 +13,9 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description'
+        'description',
+        'featured_image',
+        'parent_id'
     ];
     // protected $softDelete = true;
     use HasFactory;
@@ -21,4 +23,13 @@ class Category extends Model
     {
         return $this->belongsToMany(BLog::class, 'blogs_cats', 'cat_id', 'blog_id');
     }
+    public function children()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id');
+    }
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Category', 'parent_id');
+    }
+
 }

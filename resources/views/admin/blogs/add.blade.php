@@ -40,7 +40,7 @@
                                 </div>
                             @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                             <label for="short_description">Short Description</label>
                             <textarea class="form-control @error('short_description') is-invalid @enderror" id="short_description" placeholder="Short Description" name="short_description">{{old('short_description')}}</textarea>
                             @error('short_description')
@@ -51,6 +51,38 @@
                             </div>
                         </div>
                     </div>
+
+                <div class="card shadow mb-4">
+                     <div class="card-body">
+                           <div class="form-group">
+                             <label for="meta_title">Meta Title</label>
+                            <input type="text"  required="" id="meta_title" class="form-control  @error('meta_title') is-invalid @enderror" name="meta_title" placeholder="Meta Title" value="{{old('meta_title')}}">        
+                                @error('meta_title')
+                                    <div class="text-danger">
+                                        {{$message}}                                            
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                            <label for="meta_keyword">Meta Keywords</label>
+                            <textarea class="form-control @error('meta_keyword') is-invalid @enderror" id="meta_keyword" placeholder="Meta Keywords" name="meta_keyword">{{old('meta_keyword')}}</textarea>
+                            @error('meta_keyword')
+                                <div class="text-danger">
+                                    {{$message}}                                            
+                                </div>
+                            @endif
+                            </div>
+                            <div class="form-group">
+                            <label for="meta_description">Meta Description</label>
+                            <textarea class="form-control @error('meta_description') is-invalid @enderror" id="meta_description" placeholder="Meta Description" name="meta_description">{{old('meta_description')}}</textarea>
+                            @error('meta_description')
+                                <div class="text-danger">
+                                    {{$message}}                                            
+                                </div>
+                            @endif
+                            </div>
+                     </div>
+                </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card shadow mb-4">
@@ -105,6 +137,23 @@
                                     <div class="custom-control custom-checkbox small">
                                         <input id="cat" type="checkbox" {{(in_array($cat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$cat->id}}">
                                         <label for="cat" class="custom-control-label">{{ $cat->name }}</label>
+                                    </div>
+                                    <div style="padding-left: 9px;">  
+                                        
+                                        @foreach($cat->children as $subcat)                                              
+                                                <div class="custom-control custom-checkbox small">
+                                                    <input id="{{ $subcat->name }}" type="checkbox" {{(in_array($subcat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcat->id}}">
+                                                    <label for="{{ $subcat->name }}" class="custom-control-label">{{ $subcat->name }}</label>
+                                                </div>       
+                                                    <div style="padding-left: 9px;">                                 
+                                                @foreach($subcat->children as $subcatsub)                                                
+                                                        <div class="custom-control custom-checkbox small">
+                                                            <input id="{{ $subcatsub->name }}" type="checkbox" {{(in_array($subcatsub->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcatsub->id}}">
+                                                            <label for="{{ $subcatsub->name }}" class="custom-control-label">{{ $subcatsub->name }}</label>
+                                                        </div>
+                                                @endforeach
+                                                    </div>
+                                        @endforeach
                                     </div>
                                     @endforeach
                                     @error("cat.*")
