@@ -65,7 +65,7 @@
                      <div class="card-body">
                            <div class="form-group">
                              <label for="meta_title">Meta Title</label>
-                            <input type="text"  required="" id="meta_title" class="form-control  @error('meta_title') is-invalid @enderror" name="meta_title" placeholder="Meta Title" value="{{old('meta_title')}}">        
+                            <input type="text"  id="meta_title" class="form-control  @error('meta_title') is-invalid @enderror" name="meta_title" placeholder="Meta Title" value="{{old('meta_title')}}">        
                                 @error('meta_title')
                                     <div class="text-danger">
                                         {{$message}}                                            
