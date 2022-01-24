@@ -21,7 +21,7 @@ class Category extends Model
     use HasFactory;
     public function blogs()
     {
-        return $this->belongsToMany(BLog::class, 'blogs_cats', 'cat_id', 'blog_id');
+        return $this->belongsToMany('App\Models\BLog' , 'blogs_cats', 'cat_id', 'blog_id');
     }
     public function children()
     {
