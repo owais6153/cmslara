@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Rules\MenuRule;
 class MenuRequest extends FormRequest
 {
     /**
@@ -25,7 +25,7 @@ class MenuRequest extends FormRequest
     {
         return [
             'menu_type' => 'required',
-            'menu' => 'required',
+            'menu' => ['required', new MenuRule()],
         ];
     }
 }
