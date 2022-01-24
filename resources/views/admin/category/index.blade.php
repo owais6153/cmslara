@@ -88,7 +88,6 @@
 			                        <tr>
 		                            <th scope="col">ID</th>
 							      <th scope="col">Category Name</th>
-							      <th scope="col">Total Blogs</th>
 								  <th scope="col">Parent</th>
 							      <th scope="col">Action</th>
 								    </tr>
@@ -97,7 +96,6 @@
 			                        <tr>
 		                            <th scope="col">ID</th>
 							      <th scope="col">Category Name</th>
-							      <th scope="col">Total Blogs</th>
 								  <th scope="col">Parent</th>
 							      <th scope="col">Action</th>
 								    </tr>
@@ -133,7 +131,6 @@
 		         columns: [
 		                  { data: 'id', name: 'id', 'visible': false},
 		                  { data: 'name', name: 'name' },
-		                  { data: 'count', name: 'count' },
 		                  { data: 'parent', name: 'parent' },
 		                  { data: 'action', name: 'action', orderable: true,searchable: true}
 		               ],

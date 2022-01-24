@@ -39,9 +39,6 @@ class CategoryController extends Controller
                 }
                 return $actionBtn;
         })
-        ->addColumn('count', function($row){
-            return $row->blogs()->count();
-        })
         ->addColumn('parent', function($row){
             $par = $row->parent()->select('name')->first();
             return $par['name'];
