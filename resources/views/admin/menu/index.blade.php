@@ -11,6 +11,11 @@
             {{session('msg')}}                                            
         </div>
         @endif
+        @error('menu')
+        <div class="alert alert-danger">
+            {{$message}}                                            
+        </div>
+        @enderror
             <div class="row">
                 <div class="col-md-8">
                     <div class="card shadow mb-4" id="menusBack">
