@@ -39,8 +39,6 @@ class FavIcon implements Rule
             }
         }
         else{
-            // Not Required
-            // False for required
             return true;
         }
 
@@ -53,6 +51,6 @@ class FavIcon implements Rule
      */
     public function message()
     {
-        return 'The fav icon size shouold be 50x50';
+        return 'The fav icon height and width should be same, Best dimesion is 16x16';
     }
 }

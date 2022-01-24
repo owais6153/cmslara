@@ -54,6 +54,6 @@ class CatDepth implements Rule
      */
     public function message()
     {
-        return "Limit exceeded.";
+        return "Hirarchy Limit exceeded.";
     }
 }

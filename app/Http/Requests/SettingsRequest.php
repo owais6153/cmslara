@@ -21,13 +21,14 @@ class SettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|max:255',
             // General
-            'value.site_name' => 'exclude_unless:name,general|required',
-            'value.site_title' => 'exclude_unless:name,general|required',
-            'value.home_page' => 'exclude_unless:name,general|required',
+            'value.site_name' => 'exclude_unless:name,general|required|max:255',
+            'value.site_title' => 'exclude_unless:name,general|required|max:255',
+            'value.home_page' => 'exclude_unless:name,general|required|max:255',
             'value.site_fav' => [
                 'exclude_unless:name,general',
+                'max:255',
                 new FavIcon()
             ],
             // Regestration
