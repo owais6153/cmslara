@@ -122,7 +122,7 @@ class BlogController extends Controller
             'user_id' => $blogDetail['user_id']
         ]);
         if($request->has('cat'))
-            $blog->categories()->attach($request->cat);
+            $blog->categories()->sync($request->cat);
 
         return Redirect::route('blogs')->with(['msg' => 'Blog Updated', 'msg_type' => 'success']);
     }
