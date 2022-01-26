@@ -11,7 +11,7 @@
     })
     $("body").delegate("input[name='navigation_label']", "change paste keyup", function (e) {
         $(this).closest(".dd-item").data("label", $(this).val());
-        $(this).closest(".dd-item").find(".dd3-content span").text($(this).val());
+        $(this).closest(".dd-item").children(".dd3-content").find('span').text($(this).val());
     });
 
     $("body").delegate("input[name='navigation_url']", "change paste keyup", function (e) {
