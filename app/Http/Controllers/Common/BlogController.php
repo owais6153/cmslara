@@ -123,6 +123,8 @@ class BlogController extends Controller
         ]);
         if($request->has('cat'))
             $blog->categories()->sync($request->cat);
+        else
+            $blog->categories()->sync(array());
 
         return Redirect::route('blogs')->with(['msg' => 'Blog Updated', 'msg_type' => 'success']);
     }
