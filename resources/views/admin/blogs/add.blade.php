@@ -135,21 +135,21 @@
                                     @endphp
                                     @foreach($categories as $cat)
                                     <div class="custom-control custom-checkbox small">
-                                        <input id="cat" type="checkbox" {{(in_array($cat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$cat->id}}">
-                                        <label for="cat" class="custom-control-label">{{ $cat->name }}</label>
+                                        <input id="{{ $cat->name }}{{ $cat->id }}" type="checkbox" {{(in_array($cat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$cat->id}}">
+                                        <label for="{{ $cat->name }}{{ $cat->id }}" class="custom-control-label">{{ $cat->name }}</label>
                                     </div>
                                     <div style="padding-left: 9px;">  
                                         
                                         @foreach($cat->children as $subcat)                                              
                                                 <div class="custom-control custom-checkbox small">
-                                                    <input id="{{ $subcat->name }}" type="checkbox" {{(in_array($subcat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcat->id}}">
-                                                    <label for="{{ $subcat->name }}" class="custom-control-label">{{ $subcat->name }}</label>
+                                                    <input id="{{ $subcat->name }}{{ $subcat->id }}" type="checkbox" {{(in_array($subcat->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcat->id}}">
+                                                    <label for="{{ $subcat->name }}{{ $subcat->id }}" class="custom-control-label">{{ $subcat->name }}</label>
                                                 </div>       
                                                     <div style="padding-left: 9px;">                                 
                                                 @foreach($subcat->children as $subcatsub)                                                
                                                         <div class="custom-control custom-checkbox small">
-                                                            <input id="{{ $subcatsub->name }}" type="checkbox" {{(in_array($subcatsub->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcatsub->id}}">
-                                                            <label for="{{ $subcatsub->name }}" class="custom-control-label">{{ $subcatsub->name }}</label>
+                                                            <input id="{{ $subcatsub->name }}{{ $subcatsub->id }}" type="checkbox" {{(in_array($subcatsub->id, $cats)) ? 'checked="checked"' : ''}} class=" custom-control-input" name="cat[]" value="{{$subcatsub->id}}">
+                                                            <label for="{{ $subcatsub->name }}{{ $subcatsub->id }}" class="custom-control-label">{{ $subcatsub->name }}</label>
                                                         </div>
                                                 @endforeach
                                                     </div>
