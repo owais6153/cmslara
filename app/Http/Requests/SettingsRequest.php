@@ -33,6 +33,15 @@ class SettingsRequest extends FormRequest
             ],
             // Regestration
             'value.default_role'=> 'exclude_unless:name,registration|required',
+            // EMAIL
+            'value.MAIL_DRIVER'=> 'exclude_unless:name,email|required',
+            'value.MAIL_HOST'=> 'exclude_unless:name,email|required',
+            'value.MAIL_PORT'=> 'exclude_unless:name,email|required',
+            'value.MAIL_USERNAME'=> 'exclude_unless:name,email|email|required',
+            'value.MAIL_PASSWORD'=> 'exclude_unless:name,email|required',
+            'value.MAIL_ENCRYPTION'=> 'exclude_unless:name,email|required',
+            'value.MAIL_FROM_ADDRESS'=> 'exclude_unless:name,email|email|required',
+            'value.MAIL_FROM_NAME'=> 'exclude_unless:name,email|required',
 
         ];
     }
