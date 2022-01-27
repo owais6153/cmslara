@@ -11521,3 +11521,9 @@ ol ol {
   color: #ccc;
   cursor: pointer;
 }
+
+.row.social-media i {
+  font-size: 35px;
+  color: #4e73df;
+  margin-bottom: 1rem;
+}
