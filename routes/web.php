@@ -60,8 +60,7 @@ Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth']], funct
      \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
-// Store User IP
-Route::post('/notification/store', [SendNotification::class, 'store'])->name('notification.store');    
+
 
 // Admin
 Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->group( function () {
@@ -123,6 +122,7 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     //Notification 
     Route::get('/notification/', [SendNotification::class, 'index'])->name('notification')->middleware('role:allowNotifications');
     Route::post('/notification/send', [SendNotification::class, 'send'])->name('notification.send')->middleware('role:allowNotifications');
-    Route::post('/notification/store', [SendNotification::class, 'storeIP'])->name('notification.store')->middleware('role:allowNotifications');
 });
 
+// Store User IP
+Route::post('/notification/store', [SendNotification::class, 'store'])->name('notification.store');    
