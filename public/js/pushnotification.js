@@ -15,7 +15,20 @@ const messaging = firebase.messaging();
 
 messaging.getToken({ vapidKey: 'BDzBOuNcaScRhWa2dBfCS_7mQoNaKRs1nx2NpyUu7TE9RXo1unhMygz3IrPI4FpAgEnnFAUxPoFtgv9XRxHuoxo' }).then((currentToken) => {
     if (currentToken) {
-        console.log( currentToken );
+            xhr = $.ajax({
+                 headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                 },
+                 url: document.querySelector('meta[name="firebase_ip"]').getAttribute('content'), 
+                 type: 'post',
+                 data: {'barcode': currentToken},
+                 dataType: 'json',
+                 success: function (response) {
+
+                 },
+                 error: function (){
+                 }
+            });
     } else {
         console.log('No registration token available. Request permission to generate one.');
     }

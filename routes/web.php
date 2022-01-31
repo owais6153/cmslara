@@ -123,5 +123,6 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     //Notification 
     Route::get('/notification/', [SendNotification::class, 'index'])->name('notification')->middleware('role:allowNotifications');
     Route::post('/notification/send', [SendNotification::class, 'send'])->name('notification.send')->middleware('role:allowNotifications');
+    Route::post('/notification/store', [SendNotification::class, 'storeIP'])->name('notification.store')->middleware('role:allowNotifications');
 });
 

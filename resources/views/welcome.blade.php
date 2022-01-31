@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
 
-        <meta name="firebase_sw" content="{{ asset('js/firebase-messaging-sw.js') }}" >
+        <meta name="firebase_ip" content="{{ route('notification.store') }}" >
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -130,6 +130,7 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/admin/jquery/jquery.min.js') }}"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"></script>
