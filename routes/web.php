@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Common\SendNotification;
 use App\Http\Controllers\Common\SettingsController;
 use App\Http\Controllers\Common\BlogController;
 use App\Http\Controllers\Common\CategoryController;
@@ -58,6 +59,9 @@ Route::middleware(['AllowedRegistration'])->group( function () {
 Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth']], function () {
      \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+// Store User IP
+Route::post('/notification/store', [SendNotification::class, 'store'])->name('notification.store');    
 
 // Admin
 Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->group( function () {
@@ -115,5 +119,9 @@ Route::middleware(['auth', 'verified', 'CanAccessDashboard'])->prefix('admin')->
     Route::get('/categories/{category:id}/edit/', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('role:updateCategories');
     Route::post('/categories/{category:id}/update/', [CategoryController::class, 'update'])->name('categories.update')->middleware('role:updateCategories');
     Route::get('/categories/{category:id}/delete', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('role:deleteCategories');
+    
+    //Notification 
+    Route::get('/notification/', [SendNotification::class, 'index'])->name('notification')->middleware('role:allowNotifications');
+    Route::post('/notification/send', [SendNotification::class, 'send'])->name('notification.send')->middleware('role:allowNotifications');
 });
 

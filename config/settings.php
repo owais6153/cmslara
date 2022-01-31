@@ -47,6 +47,9 @@
                 'Access Settings' =>'accessSettings',
                 'Access Dashboard' =>'accessDashboard',
             ],
+            'Notifications' => [
+                'Allow Sending Notifications' =>'allowNotifications',
+            ],
         ],
         'settings' => [
             'general' => [
@@ -71,4 +74,13 @@
                 'MAIL_FROM_NAME' => env('MAIL_FROM_NAME'),
             ],
         ],
+        // Firebase
+        'apiKey' => "AIzaSyChBiRb-muGHgmq1-tT4UffmjcjvRk6IUs",
+        'authDomain' => "erba-quest.firebaseapp.com",
+        'projectId' => "erba-quest",
+        'storageBucket' => "erba-quest.appspot.com",
+        'messagingSenderId' => "364135749212",
+        'appId' => "1:364135749212:web:a2885f5a12e0a497b33899",
+        'measurementId' => "G-Y2C4SP9G3W",
+        'vapidKey' => 'BDzBOuNcaScRhWa2dBfCS_7mQoNaKRs1nx2NpyUu7TE9RXo1unhMygz3IrPI4FpAgEnnFAUxPoFtgv9XRxHuoxo'        
 	];

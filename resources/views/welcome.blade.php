@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+
+        <meta name="firebaseapikey" content="{{config('settings.apiKey')}}" >
+        <meta name="firebaseauthDomain" content="{{config('settings.authDomain')}}" >
+        <meta name="firebaseprojectId" content="{{config('settings.projectId')}}" >
+        <meta name="firebasestorageBucket" content="{{config('settings.storageBucket')}}" >
+        <meta name="firebasemessagingSenderId" content="{{config('settings.messagingSenderId')}}" >
+        <meta name="firebaseappId" content="{{config('settings.appId')}}" >
+        <meta name="firebasemeasurementId" content="{{config('settings.measurementId')}}" >
+        <meta name="firebasevapidKey" content="{{config('settings.vapidKey')}}" >
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -128,5 +137,9 @@
                 </div>
             </div>
         </div>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"></script>
+        <script src="{{ asset('js/pushnotification.js') }}"></script>
     </body>
 </html>
