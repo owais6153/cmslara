@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\IP;
 use Validator;
+use App\Notifications\PushNotification;
+use Illuminate\Support\Facades\Notification;
+
 class SendNotification extends Controller
 {
     public  function index(){
@@ -24,7 +27,12 @@ class SendNotification extends Controller
             return back()->withErrors($validation->messages()->getMessages())->withInput();
         }
         else{
-            echo 'Good';
+            $IPs= IP::pluck('ip');
+            if(!empty($IPs)){
+                Notification::send($IPs, new PushNotification($request->title, $request->body, $request->action));
+            }
+            return back()->with(['msg' => 'Notification Sent.', 'msg_type' => 'success']);   
+            
         }
     }
     public function store(Request $request){

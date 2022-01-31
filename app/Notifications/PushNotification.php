@@ -3,9 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Notifications\FirebaseChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 class PushNotification extends Notification implements ShouldQueue
 {
@@ -18,13 +18,11 @@ class PushNotification extends Notification implements ShouldQueue
      */
     public $title = '';
     public $body = '';
-    public $recepent = '';
     public $action = '';
-    public function __construct($title, $body, $recepent, $action)
+    public function __construct($title, $body, $action)
     {
         $this->title = $title;
         $this->body = $body;
-        $this->recepent = $recepent;
         $this->action = $action;
     }
 
@@ -36,7 +34,7 @@ class PushNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['firebase'];
+        return [FirebaseChannel::class];
     }
 
     /**
@@ -59,11 +57,11 @@ class PushNotification extends Notification implements ShouldQueue
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_POSTFIELDS =>'{
-            "registration_ids":["'.$recepent.'"],
+            "registration_ids":["'.$notifiable.'"],
             "data":{
-                "title":"'.$title.'",
-                "body":"'.$body.'",
-                "action": "'.$action.'"
+                "title":"'.$this->title.'",
+                "body":"'.$this->body.'",
+                "action": "'.$this->action.'"
             }
         }',
           CURLOPT_HTTPHEADER => array(
