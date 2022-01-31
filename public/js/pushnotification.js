@@ -17,11 +17,11 @@ messaging.getToken({ vapidKey: 'BDzBOuNcaScRhWa2dBfCS_7mQoNaKRs1nx2NpyUu7TE9RXo1
     if (currentToken) {
             xhr = $.ajax({
                  headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                  },
-                 url: document.querySelector('meta[name="firebase_ip"]').getAttribute('content'), 
+                 url: $('meta[name="firebase_ip"]').attr('content'), 
                  type: 'post',
-                 data: {'barcode': currentToken},
+                 data: {'currentToken': currentToken},
                  dataType: 'json',
                  success: function (response) {
 
