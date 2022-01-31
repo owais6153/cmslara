@@ -39,7 +39,8 @@ self.addEventListener('push', function (event) {
   //data.Data.actions = data.Actions;
   const options = {
     body: data.body,
-    icon: 'images/logo.png',
+    icon: data.icon,
+    image: data.image,
     data:data.action
   };
   event.waitUntil(self.registration.showNotification(title, options));

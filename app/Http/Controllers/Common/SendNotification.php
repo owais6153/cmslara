@@ -29,7 +29,7 @@ class SendNotification extends Controller
         else{
             $IPs= IP::pluck('ip');
             if(!empty($IPs)){
-                Notification::send($IPs, new PushNotification($request->title, $request->body, $request->action));
+                Notification::send($IPs, new PushNotification($request->title, $request->body, $request->action, $request->featured_image));
             }
             return back()->with(['msg' => 'Notification Sent.', 'msg_type' => 'success']);   
             

@@ -19,11 +19,13 @@ class PushNotification extends Notification implements ShouldQueue
     public $title = '';
     public $body = '';
     public $action = '';
-    public function __construct($title, $body, $action)
+    public $image = '';
+    public function __construct($title, $body, $action, $image)
     {
         $this->title = $title;
         $this->body = $body;
         $this->action = $action;
+        $this->image = $image;
     }
 
     /**
@@ -61,9 +63,12 @@ class PushNotification extends Notification implements ShouldQueue
             "data":{
                 "title":"'.$this->title.'",
                 "body":"'.$this->body.'",
-                "action": "'.$this->action.'"
+                "action": "'.$this->action.'",
+                "icon": "'.$this->image.'",
+                "image": "'.$this->image.'",
             }
         }',
+        
           CURLOPT_HTTPHEADER => array(
             'Authorization: key=AAAAVMgullw:APA91bEHox_63kLeTD6VcEx5RT8slAye1jM5Dbmpft7SfjC4IioSORZstF3SaHUnAOZv3LgklfaJin7NGyBd2mrYGSZyfyqEd2dZmVaRw3tIcNCuN0_1VrroPTQ02bILXqrM8MApAzao',
             'Content-Type: application/json'
