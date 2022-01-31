@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class IP extends Model
 {
     use HasFactory;
-    protected $table='ip';
+    protected $table='ips';
 }

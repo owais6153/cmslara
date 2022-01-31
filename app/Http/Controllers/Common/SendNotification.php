@@ -27,19 +27,19 @@ class SendNotification extends Controller
             echo 'Good';
         }
     }
-    public function storeIP(Request $request){
+    public function store(Request $request){
         $validation = Validator::make($request->all(),[
-          'ip' => 'required',
+          'currentToken' => 'required',
         ]);
         if ($validation->fails())
         {
             return response()->json(['error', 'Sorry we got an error in storing your IP!']);
         }
         else{
-            $countIP = IP::where('ip', $request->ip)->count();
+            $countIP = IP::where('ip', $request->currentToken)->count();
             if ($countIP < 1) {
                 $ip = new IP();
-                $ip->ip = $request->ip;
+                $ip->ip = $request->currentToken;
                 $ip->save();
             }
         }
