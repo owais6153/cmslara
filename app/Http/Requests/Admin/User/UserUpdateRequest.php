@@ -16,6 +16,13 @@ class UserUpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if($this->get('old_email') != $this->get('email')){
+            $this->merge(['email_verified_at' => 'unverified']);
+        }
+
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,7 +33,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'id' => 'required',
             'name' => 'required|max:255',
-            'email' => 'email|required|max:255',
+            'email' => 'unique:users,email,'.$this->get('id').'|email|required|max:255',
             'role' => 'required',
         ];
     }
