@@ -25,7 +25,7 @@ class SendNotification extends Controller
         }
         return back()->with(['msg' => 'Notification Sent.', 'msg_type' => 'success']); 
             
-        }
+        
     }
     public function store(Request $request){
         $validation = Validator::make($request->all(),[
