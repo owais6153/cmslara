@@ -20,12 +20,14 @@ class PushNotification extends Notification implements ShouldQueue
     public $body = '';
     public $action = '';
     public $image = '';
-    public function __construct($title, $body, $action, $image)
+    public $icon = '';
+    public function __construct($title, $body, $action, $image, $logo)
     {
         $this->title = $title;
         $this->body = $body;
         $this->action = $action;
         $this->image = $image;
+        $this->icon = $logo;
     }
 
     /**
@@ -64,7 +66,7 @@ class PushNotification extends Notification implements ShouldQueue
                 "title":"'.$this->title.'",
                 "body":"'.$this->body.'",
                 "action": "'.$this->action.'",
-                "icon": "'.$this->image.'",
+                "icon": "'.$this->icon.'",
                 "image": "'.$this->image.'",
             }
         }',

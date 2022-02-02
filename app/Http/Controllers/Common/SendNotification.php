@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Common;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\IP;
+use App\Models\Settings;
 use Validator;
 use App\Notifications\PushNotification;
+use App\Http\Requests\Admin\SendNotificationRequest;
 use Illuminate\Support\Facades\Notification;
 
 class SendNotification extends Controller
@@ -14,24 +16,14 @@ class SendNotification extends Controller
     public  function index(){
         return view('admin.notification.index');
     }
-    public function send(Request $request){
-        $validation = Validator::make($request->all(),[
-          'title' => 'required',
-          'body' => 'required',
-          'featured_image' => 'required',
-          'action' => 'required',
-        ]);
-
-        if ($validation->fails())
-        {
-            return back()->withErrors($validation->messages()->getMessages())->withInput();
+    public function send(SendNotificationRequest $request){
+        $notify = $request->getNotification();
+        $Settings = Settings::get('general');
+        $IPs= IP::pluck('ip');
+        if(!empty($IPs)){
+            Notification::send($IPs, new PushNotification($notify['title'], $notify['body'], $notify['action'], $notify['featured_image'], (isset($Settings['site_logo'])) ? $Settings['site_logo'] : ''));
         }
-        else{
-            $IPs= IP::pluck('ip');
-            if(!empty($IPs)){
-                Notification::send($IPs, new PushNotification($request->title, $request->body, $request->action, $request->featured_image));
-            }
-            return back()->with(['msg' => 'Notification Sent.', 'msg_type' => 'success']);   
+        return back()->with(['msg' => 'Notification Sent.', 'msg_type' => 'success']); 
             
         }
     }
